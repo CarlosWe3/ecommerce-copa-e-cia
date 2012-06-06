@@ -23,8 +23,9 @@ class html {
 	    			} else {
 	    				$link_arquivo = "{$dir}/css/{$nom_arquivo_css}";	 
 	    			}		
+					$returno .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$link_arquivo}\" />\n\t\t";
 				}
-				$returno .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$link_arquivo}\" />\n\t\t";
+				
 				return $returno;
 			} 
 			
