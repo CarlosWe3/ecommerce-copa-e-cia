@@ -27,12 +27,15 @@ class conexao {
 		// Pega dados do arquivo de configuracao.
 		$tip_bd 	= TIPO_CON;
 		$host 		= SERVIDOR_CON;
-		$bd			= BD_CON;
+		$bd		= BD_CON;
 		$usuario 	= USER_CON;
 		$senha 		= SENHA_CON;
 		$encode 	= $this->encode;
 		$Conn 		= false;
 		
+		/*
+		* Caso tenha que implementar o PDO em outro banco de dados, inclir mais um Case mudando a conexão para o formato que necessitava.
+		*/
 		switch ($tip_bd) {
 			case 'mysql':			
 			try {
@@ -41,16 +44,16 @@ class conexao {
 				$Conn -> exec("SET CHARACTER SET {$encode}");
 				$this->conn = $Conn;
 			} catch (PDOException $e) {
-            	echo 'Erro na conexão: ' . $e->getMessage();
-                exit;
-            }
+	            		echo 'Erro na conexão: ' . $e->getMessage();
+	                	exit;
+		        }
 			break;
 		}
 	}
 	
 	/**
 	 * 
-	 * Captura a conexao instacianda no __construct
+	 * Captura a conexao instacianda no construct
 	 */
 	public function getConexao() {
 		return $this->conn;
