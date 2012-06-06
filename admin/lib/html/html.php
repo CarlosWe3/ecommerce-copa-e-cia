@@ -14,6 +14,7 @@ class html {
    		$dir = $dir ? $dir : BASE_URL."app/webroot";
    		
   		$returno = '';
+		
 	    if (is_array($arquivo)) {
 	    	if (!empty($arquivo)) {
 				foreach ($arquivo as $nom_arquivo_css) {
@@ -21,10 +22,9 @@ class html {
 	    				$link_arquivo = $nom_arquivo_css;
 	    			} else {
 	    				$link_arquivo = "{$dir}/css/{$nom_arquivo_css}";	 
-	    			}
-					$returno .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$link_arquivo}\" />\n\t\t";
-					exit($returno);
+	    			}		
 				}
+				$returno .= "<link type=\"text/css\" rel=\"stylesheet\" href=\"{$link_arquivo}\" />\n\t\t";
 				return $returno;
 			} 
 			
@@ -43,14 +43,15 @@ class html {
    static function script($arquivo, $dir=false) {
    		$dir = $dir ? $dir : BASE_URL."app/webroot";
    		
-    	$return = '';   	
+    	$return = '';   
+			
 	    if (is_array($arquivo)) {
 	    	if (!empty($arquivo)) {
-				foreach ($arquivo as $linkCss) {
-					if (substr($linkCss, 0, 4) == 'http') {
-	    				$linkArquivo = $linkCss;
+				foreach ($arquivo as $linkArq) {
+					if (substr($linkArq, 0, 4) == 'http') {
+	    				$linkArquivo = $linkArq;
 	    			} else {
-	    				$linkArquivo = "{$dir}/js/{$linkCss}";
+	    				$linkArquivo = "{$dir}/js/{$linkArq}";
 	    			}	
 					$return .= "<script type=\"text/javascript\" src=\"{$linkArquivo}\"></script>\n";
 				}
