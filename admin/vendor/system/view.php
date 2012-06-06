@@ -29,6 +29,12 @@ class view {
     public $_charset = "utf-8";
 	/**
 	 * 
+	 * Charset do site
+	 * @param string $_charset
+	 */
+    public $_idioma = "pt-BR";
+	/**
+	 * 
 	 * Título 
 	 * @var string
 	 */
