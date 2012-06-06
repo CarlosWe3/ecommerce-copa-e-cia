@@ -9,9 +9,7 @@ class indexController extends controller {
 	}
 	
 	function index() {
-		$this->loaderLib("html");
 		$this->_view->titulo = "Teste";	
-		
 		
 	}
 
