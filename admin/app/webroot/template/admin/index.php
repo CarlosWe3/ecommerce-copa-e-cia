@@ -1,35 +1,46 @@
-<!DOCTYPE html>
-<html lang="<?php echo $this->_idioma ?>">
+<?php
+/**
+ * @author Carlos Augusto Gartner
+ * 
+ * Layout da administração, as informações de idioma e charset vem do arquivo da "View"
+ * 
+ * @package View
+ */
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $this->_idioma ?>">
 	<head>
-		<meta charset="<?php echo $this->_charset ?>" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<title><?php echo $this->_titulo ?></title>
-		<meta name="description" content="" />
-		<meta name="author" content="Ricardo" />
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $this->_charset ?>" />
+		<title>Administração - </title>
+		<meta name="author" content="WE3 Online" />
+		<?php  
+			
+		?>
 	</head>
 	<body>
-		<div>
-			<header>
-				<h1>Título</h1>
-			</header>
-			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Contact</a>
-				</p>
-			</nav>
-			<div></div>
-			<footer>
-				<p>
-					&copy; Copyright  by Ricardo
-				</p>
-			</footer>
+		<!-- Inicio Header  -->
+		<div id="header">
+			
 		</div>
+		<!-- Fim Header -->
+		
+		<!-- Inicio Menu -->
+		<div id="Nav">
+			
+		</div>
+		<!-- Fim Menu -->
+		
+		<!-- Inicio Middle -->
+		<div id="Middle">
+			
+		</div>
+		<!-- Fim Middle -->
+		
+		<!-- Inicio Footer -->
+		<div id="Footer">
+			
+		</div>
+		<!-- Fim Footer -->
 	</body>
 </html>
