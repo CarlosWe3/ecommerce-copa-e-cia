@@ -15,15 +15,15 @@
 		<title>Administração - <?php echo isset($this->_titulo) ? $this->_titulo : '' ?></title>
 		<meta name="author" content="WE3 Online" />
 		<?php  
-			echo html::css(array('reset.css','style.css','layout.css','menu.css'));
+			echo html::css(array('reset.css','style.css','layout.css','menu.css','padrao.css'));
 			echo html::script('modernizr.js');
 		?>
 	</head>
 	<body>
 		<!-- Inicio Header  -->
 		<div id="header">
-			<h1>Administração | E-commerce</h1>
-			<p class="msg-usuario">Seja bem vindo {usuario}, {sair}</p>
+			<h1>Administração | <span>E-commerce</span></h1>
+			<p class="msg-usuario">Seja bem vindo <a>{usuario}</a>, <a>{sair}</a></p>
 		</div>
 		<!-- Fim Header -->
 		
@@ -31,15 +31,16 @@
 		<div>
 			<ul id="nav">
 				<li class="current"><a href="#">Home</a></li>
-				<li><a href="#">Catálogo</a>
+				<li><a href="#">Catálogo ⇣</a>
 					<ul>
 						<li><a href="#">Produtos</a></li>
 						<li><a href="#">Categorias</a></li>
 						<li><a href="#">Tags</a></li>
 					</ul>					
 				</li>
+				<li><a href="#">Clientes</a></li>
 				<li><a href="#">Pedidos</a></li>
-				<li><a href="#">Sistema</a>
+				<li><a href="#">Sistema ⇣</a>
 					<ul>
 						<li><a href="#">Configurações</a></li>
 						<li><a href="#">Taxas</a></li>
@@ -53,13 +54,16 @@
 		
 		<!-- Inicio Middle -->
 		<div id="middle">
-			
+			<?php 
+				$this->getMensagem();
+				require($path_view);
+			?>
 		</div>
 		<!-- Fim Middle -->
 		
 		<!-- Inicio Footer -->
 		<div id="footer">
-			
+			<p>(c) Copyright <?php echo date('Y') ?>. Todos os direitos reservados. </p>
 		</div>
 		<!-- Fim Footer -->
 		

@@ -1,15 +1,19 @@
 #nav {
 	margin: 0;
-	padding: 7px 0;
+	padding: 1px 0;
 	background: #7d7d7d;
 	line-height: 100%;
 
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0, .4);
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0, .4);
 	width: 100%;
+	
+	position: absolute;
+	top: 40px;
+	z-index: 10 !important;
 }
 #nav li {
-	margin: 0 5px;
+	margin: 0px;
 	float: left;
 	position: relative;
 	list-style: none;
@@ -24,7 +28,9 @@
 	padding:  8px 20px;
 	margin: 0;
 	text-shadow: 0 1px 1px #000;
+	font-size: 14px;
 }
+
 #nav a:hover {
 	background: #000;
 	color: #fff;
@@ -34,11 +40,9 @@
 #nav .current a, #nav li:hover > a {
 	background: #666;
 	color: #fff;
-	
 	-webkit-box-shadow: 0 1px 1px rgba(0,0,0, .2);
 	-moz-box-shadow: 0 1px 1px rgba(0,0,0, .2);
 	box-shadow: 0 1px 1px rgba(0,0,0, .2);
-
 	text-shadow: 0 1px 0 rgba(0,0,0, 1);
 }
 
@@ -70,7 +74,7 @@
 	padding: 0;
 	width: 185px;
 	position: absolute;
-	top: 35px;
+	top: 25px;
 	left: 0;
 	background: #ddd;
 	border: solid 1px #b4b4b4;
@@ -93,7 +97,7 @@
 /* level 3+ list */
 #nav ul ul {
 	left: 181px;
-	top: -3px;
+	top: -10px;
 }
 
 /* clearfix */
