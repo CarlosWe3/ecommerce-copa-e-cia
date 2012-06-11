@@ -4,69 +4,76 @@
 	<a href="<?php echo BASE_URL.'clientes/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
 
-<div class="box">
-	<form>
-		<h2>Buscar clientes:</h2>
-		<p class="fl input margin5">
-			<label>Nome:</label>
-			<input type="text"/>
-		</p>
-		<p class="fl input margin5">
-			<label>E-mail:</label>
-			<input type="text"/>
-		</p>
-		<p class="fl input margin5">
-			<label>Nº RG:</label>
-			<input type="text" class="rg"/>
-		</p>
-		<p class="fl input margin5">
-			<label>Nº CPF:</label>
-			<input type="text" class="cpf"/>
-		</p>
-		<p class="fl input margin5">
-			<label>Nº CNPJ:</label>
-			<input type="text" class="cnpj"/>
-		</p>
-		<input class="botao fl" type="submit" value="Buscar"/>
-	</form>
-</div>
+<form method="post">
+	<div class="box">
+			<h2>Buscar clientes:</h2>
+			<p class="fl input margin5">
+				<label>Nome:</label>
+				<input type="text"/>
+			</p>
+			<p class="fl input margin5">
+				<label>E-mail:</label>
+				<input type="text"/>
+			</p>
+			<p class="fl input margin5">
+				<label>Nº RG:</label>
+				<input type="text" class="rg"/>
+			</p>
+			<p class="fl input margin5">
+				<label>Nº CPF:</label>
+				<input type="text" class="cpf"/>
+			</p>
+			<p class="fl input margin5">
+				<label>Nº CNPJ:</label>
+				<input type="text" class="cnpj"/>
+			</p>
+			<input class="botao fl" name="buscar" type="submit" value="Buscar"/>
+	</div>
+</form>
 
-<div class="box">
-	<table>
-		<thead>
-			<tr>
-				<th class="tal"></th>
-				<th class="tal">Código</th>
-				<th class="tal">Nome</th>
-				<th class="tal">E-mail</th>
-				<th class="tac">Telefones</th>
-				<th class="tal">Tipo</th>
-				<th class="tal">Visualizar</th>
-				<th class="tal">Alterar</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="tal width5"><input name="check[]" type="checkbox"/></td>
-				<td class="tal">Código</td>
-				<td class="tal">Nome</td>
-				<td class="tal">E-mail</td>
-				<td class="tac">Telefones</td>
-				<td class="tal">Tipo</td>
-				<td class="tal width5">
-					<a href="<?php echo BASE_URL.'clientes/visualizar'; ?>" class="botao fl">Visualizar</a>
-				</td>
-				<td class="tal width5">
-					<a href="<?php echo BASE_URL.'clientes/alterar'; ?>" class="botao fl amarelo">Alterar</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<table>
-		<tbody>
-			<!-- função check esta em js/check.js -->
-			<td class="tal"><input onclick="check();" type="checkbox"/>Selecionar todos</td>
-			<td class="tar"><input class="botao fr vermelho" type="submit" value="Excluir selecionados"/></td>
-		</tbody>
-	</table>
-</div>
+<form method="post" action="<?php echo BASE_URL.'clientes/excluir'; ?>">
+	<div class="box">
+		<table>
+			<thead>
+				<tr>
+					<th class="tal"></th>
+					<th class="tal">Código</th>
+					<th class="tal">Nome</th>
+					<th class="tal">E-mail</th>
+					<th class="tac">Telefones</th>
+					<th class="tal">Tipo</th>
+					<th class="tal">Visualizar</th>
+					<th class="tal">Alterar</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="tal width5"><input value="cod" name="check[]" type="checkbox"/></td>
+					<td class="tal">Código</td>
+					<td class="tal">Nome</td>
+					<td class="tal">E-mail</td>
+					<td class="tac">Telefones</td>
+					<td class="tal">Tipo</td>
+					<td class="tal width5">
+						<a href="<?php echo BASE_URL.'clientes/visualizar'; ?>" class="botao fl">Visualizar</a>
+					</td>
+					<td class="tal width5">
+						<a href="<?php echo BASE_URL.'clientes/alterar'; ?>" class="botao fl amarelo">Alterar</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<table>
+			<tbody>
+				<!-- função check esta em js/check.js -->
+				<td class="tal"><input onclick="check();" type="checkbox"/>Selecionar todos</td>
+				<td class="tar"><input class="botao fr vermelho" type="submit" name="excluir" value="Excluir selecionados"/></td>
+			</tbody>
+		</table>
+	</div>
+</form>
+
+<?php 
+	//destroi sessão de mensagens para quando refresh não continuar exibindo mensagens
+	unset($_SESSION['_msg']);
+?>

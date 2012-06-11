@@ -96,9 +96,14 @@ class view {
 	 * Exibe mensagem de erro se existir!
 	 */
 	function getMensagem() {
-		$msg  = isset($this->_msg) ? $this->_msg : false;
+		if (isset($_SESSION['_msg'])) {
+			$msg  =  session::getSession('_msg');
+			$this->_tipoMsg = isset($_SESSION['_tipMsg']) ? session::getSession('_tipMsg') : $this->_tipoMsg;
+		} else {
+			$msg  = isset($this->_msg) ? $this->_msg : false;
+		}
+		
 		if ($msg) {
-			
 			switch ($this->_tipoMsg) {
 				case 'sucesso':
 					$classe = ' success';
