@@ -1,0 +1,60 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
+</div>
+
+<div class="box">
+	<form>
+		<p class="input required">
+			<label>Nome:</label>
+			<input type="text" class="input_min"/>
+		</p>
+		<p class="input">
+			<label>Email:</label>
+			<input type="text" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Telefone:</label>
+			<input type="text" class="tel input_min"/>
+		</p>
+		<p class="input">
+			<label>Celular:</xlabel>
+			<input type="text" class="tel input_min"/>
+		</p>
+		<p class="input required">
+			<label>Data Nascimento:</label>
+			<input type="text" class="dat input_min"/>
+		</p>
+		<p class="input required">
+			<label>Nº RG:</label>
+			<input type="text" class="rg input_min"/>
+		</p>
+		<p class="input required">
+			<label>Nº CPF:</label>
+			<input type="text" class="cpf input_min"/>
+		</p>
+		<p class="input">
+			<label>Nº CNPJ:</label>
+			<input type="text" class="cnpj input_min"/>
+		</p>
+		<p class="input">
+			<label>Gênero:</label>
+			<select>
+				<option value"M">Masculino</option>
+				<option value="F">Feminino</option>
+			</select>
+		</p>
+		<p class="input">
+			<label>Tipo:</label>
+			<select>
+				<option>Pessoa Física</option>
+				<option>Pessoa Jurídica</option>
+			</select>
+		</p>
+	</form>
+</div>
+
+<div class="box">
+	<input class="botao fr" type="submit" value="Cadastrar"/>
+</div>

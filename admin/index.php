@@ -23,7 +23,7 @@ defined('CONFIG_PATH')  ? null : define('CONFIG_PATH', SITE_ROOT . 'vendor' . DS
 defined('SYS_PATH') 	? null : define('SYS_PATH', SITE_ROOT . 'vendor' . DS . 'system' . DS);
 defined('MEDIA_PATH') 	? null : define('MEDIA_PATH', SITE_ROOT . 'media' . DS);
 // Alterar o BASE_URL quando iniciar o projeto
-defined('BASE_URL') 	? null : define('BASE_URL', 'http://server01:8082/we3dc/we3_framework/WE3_Framework/');
+defined('BASE_URL') 	? null : define('BASE_URL', 'http://server01:8082/copa_cia_ecommerce/www/admin/');
 
 try {
 	// configuracoes

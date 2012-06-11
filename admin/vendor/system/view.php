@@ -29,6 +29,30 @@ class view {
     public $_charset = "utf-8";
 	/**
 	 * 
+	 * Charset do site
+	 * @param string $_charset
+	 */
+    public $_idioma = "pt-BR";
+	/**
+	 * 
+	 * Mensagem de erro
+	 * @param string
+	 */
+	public $_msg = '';
+	/**
+	 * 
+	 * Caso tenha erro
+	 * @param boolean
+	 */
+	public $_erro = false;
+	/**
+	 * 
+	 * Tipo da mensagem
+	 * @param string - sucesso,noticia,erro
+	 */
+	public $_tipoMsg = 'sucesso';	
+	/**
+	 * 
 	 * Título 
 	 * @var string
 	 */
@@ -45,11 +69,14 @@ class view {
      */
     function renderView($name) {
    	
+		
     	//define o caminho da view
         $path_view 		= SITE_ROOT . 'app' . DS . 'view' . DS . $this->_controller . DS . $name . '.phtml';
         
         //define o caminho do template
         $path_template  = SITE_ROOT . 'app' . DS . 'webroot' . DS . 'template' . DS . $this->_layout . DS . 'index.php';
+		
+		//var_dump($path_view); exit;
     	
         if (is_readable($path_template)) {
         	// Gera ob start para que o HTML seja salvo na memória para ser incluído somente após o PHP terminar a execução.
@@ -64,5 +91,32 @@ class view {
         }
         
     }
+	
+	/**
+	 * Exibe mensagem de erro se existir!
+	 */
+	function getMensagem() {
+		$msg  = isset($this->_msg) ? $this->_msg : false;
+		if ($msg) {
+			
+			switch ($this->_tipoMsg) {
+				case 'sucesso':
+					$classe = ' success';
+					break;
+					
+				case 'noticia':
+					$classe = ' notice';
+					break;
+					
+				case 'erro':
+					$classe = ' error';
+					break;
+				
+			}
+			
+			echo "<p class=\"message{$classe}\">{$msg}</p>";
+			unset($classe,$erro);
+		}
+	}
        
 }

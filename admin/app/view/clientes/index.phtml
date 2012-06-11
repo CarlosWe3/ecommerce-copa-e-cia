@@ -1,0 +1,85 @@
+<h2><?php echo $this->titulo; ?></h2>
+<div class="box">
+	<a href="<?php echo BASE_URL.'clientes/cadastrar'; ?>" class="botao fr">Cadastrar cliente</a>
+</div>
+<div class="box">
+	<form>
+		<h2>Buscar clientes:</h2>
+		<p class="fl input margin5">
+			<label>Nome:</label>
+			<input type="text"/>
+		</p>
+		<p class="fl input margin5">
+			<label>E-mail:</label>
+			<input type="text"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº RG:</label>
+			<input type="text" class="rg"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº CPF:</label>
+			<input type="text" class="cpf"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº CNPJ:</label>
+			<input type="text" class="cnpj"/>
+		</p>
+		<input class="botao fl" type="submit" value="Buscar"/>
+	</form>
+</div>
+
+<div class="box">
+	<table>
+		<thead>
+			<tr>
+				<th class="tal"></th>
+				<th class="tal">Código</th>
+				<th class="tal">Nome</th>
+				<th class="tal">E-mail</th>
+				<th class="tac">Telefones</th>
+				<th class="tal">Tipo</th>
+				<th class="tal">Visualizar</th>
+				<th class="tal">Alterar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="tal"><input type="checkbox"/></td>
+				<td class="tal">Código</td>
+				<td class="tal">Nome</td>
+				<td class="tal">E-mail</td>
+				<td class="tac">Telefones</td>
+				<td class="tal">Tipo</td>
+				<td class="tal width5"><input class="botao" type="submit" value="Visualizar"/></td>
+				<td class="tal width5"><input class="botao amarelo" type="submit" value="Alterar"/></td>
+			</tr>
+			<tr>
+				<td class="tal"><input type="checkbox"/></td>
+				<td class="tal">Código</td>
+				<td class="tal">Nome</td>
+				<td class="tal">E-mail</td>
+				<td class="tac">Telefones</td>
+				<td class="tal">Tipo</td>
+				<td class="tal width5"><input class="botao" type="submit" value="Visualizar"/></td>
+				<td class="tal width5"><input class="botao amarelo" type="submit" value="Alterar"/></td>
+			</tr>
+			<tr>
+				<td class="tal width5"><input type="checkbox"/></td>
+				<td class="tal">Código</td>
+				<td class="tal">Nome</td>
+				<td class="tal">E-mail</td>
+				<td class="tac">Telefones</td>
+				<td class="tal">Tipo</td>
+				<td class="tal width5"><input class="botao" type="submit" value="Visualizar"/></td>
+				<td class="tal width5"><input class="botao amarelo" type="submit" value="Alterar"/></td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<tbody>
+			<td class="tal"><input type="checkbox"/>Selecionar todos</td>
+			<td class="tar"><input class="botao fr vermelho" type="submit" value="Excluir selecionados"/></td>
+		</tbody>
+	</table>
+</div>

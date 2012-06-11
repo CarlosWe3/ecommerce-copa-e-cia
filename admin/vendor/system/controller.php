@@ -38,6 +38,8 @@ class controller {
 		if ($this->auth) {
 			self::autenticaSessao();
 		}
+		
+		$this->loaderLib("html");
 	}
 	/**
 	 * 
@@ -78,6 +80,7 @@ class controller {
 	 * 
 	 * Função para redirecionamento
 	 * @param $caminho, pode ser array, contendo o redirecionamento separado por controlle, actions e valores.
+	 * @desc Teste
 	 */
 	function redir($caminho) 
 	{

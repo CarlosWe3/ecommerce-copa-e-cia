@@ -3,6 +3,7 @@
  * Classe Bootstrap
  * Gerencia os caminhos dos controllers e instancia o controller.
  * Define o método e o argumento.
+ * @author Daniel Salvagni
  */
 class bootstrap {
 
