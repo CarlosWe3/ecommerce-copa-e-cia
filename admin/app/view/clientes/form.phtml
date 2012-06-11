@@ -1,0 +1,117 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
+</div>
+<form>
+	<div class="box">
+		<p class="input required">
+			<label>Nome:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Data Nascimento:</label>
+			<input type="text" class="input_min dat"/>
+		</p>
+		<p class="input required">
+			<label>Telefone:</label>
+			<input type="text" class="input_min tel"/>
+		</p>
+		<p class="input">
+			<label>Celular:</xlabel>
+			<input type="text" class="input_min tel"/>
+		</p>
+		<p class="input">
+			<label>Email:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Senha:</label>
+			<input type="text" maxlength="20" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Gênero:</label>
+			<select>
+				<option value"M">Masculino</option>
+				<option value="F">Feminino</option>
+			</select>
+		</p>
+		<p class="input required">
+			<label>Receber Ofertas:</label>
+			<select>
+				<option>Sim</option>
+				<option>Não</option>
+			</select>
+		</p>
+	</div>	
+	
+	<div class="box">
+		<p class="input required">
+			<label>Nº RG:</label>
+			<input type="text" class="input_min rg"/>
+		</p>
+		<p class="input required">
+			<label>Nº CPF:</label>
+			<input type="text" class="input_min cpf"/>
+		</p>
+		<p class="input required">
+			<label>Tipo:</label>
+			<!-- verifica_pj esta em js/verifica_pj.js -->
+			<select onchange="verifica_pj(this.value);">
+				<option value="2">Pessoa Jurídica</option>
+				<option value="1">Pessoa Física</option>
+			</select>
+		</p>
+		<p class="input required" id="cnpj">
+			<label>Nº CNPJ:</label>
+			<input type="text" class="input_min cnpj"/>
+		</p>
+	</div>
+	
+	<div class="box">
+		<p class="input required">
+			<label>Endereço:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Numero:</label>
+			<input type="text" class="int input_min"/>
+		</p>
+		<p class="input required">
+			<label>Bairro:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input">
+			<label>Complemento:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input">
+			<label>Referência:</label>
+			<input type="text" maxlength="255" class="input_min"/>
+		</p>
+		<p class="input required">
+			<label>Cep:</label>
+			<input type="text" class="input_min cep"/>
+		</p>
+		<p class="input required">
+			<label>Cidade:</label>
+			<select>
+				<option>cidade</option>
+				<option>cidade</option>
+				<option>cidade</option>
+			</select>
+		</p>
+		<p class="input required">
+			<label>Estado:</label>
+			<select>
+				<option>estado</option>
+				<option>estado</option>
+				<option>estado</option>
+			</select>
+		</p>
+	</div>
+	
+	<div class="box">
+		<input class="botao fr" type="submit" value="Cadastrar"/>
+	</div>
+</form>

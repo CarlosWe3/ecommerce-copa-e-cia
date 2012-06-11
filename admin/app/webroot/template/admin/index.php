@@ -38,7 +38,7 @@
 						<li><a href="#">Tags</a></li>
 					</ul>					
 				</li>
-				<li><a href="#">Clientes</a></li>
+				<li><a href="<?php echo BASE_URL.'clientes'; ?>">Clientes</a></li>
 				<li><a href="#">Pedidos</a></li>
 				<li><a href="#">Sistema ⇣</a>
 					<ul>
