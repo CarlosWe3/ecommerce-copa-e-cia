@@ -35,6 +35,7 @@ class clienteInformacoesModel extends model {
 			$this->ind_recebe_oferta 	  = $res['ind_recebe_oferta'];
 			$this->cod_cliente_tipo 	  = $res['cod_cliente_tipo'];
 			$this->cod_cliente 			  = $res['cod_cliente'];
+			$this->dat_alteracao          = $res['dat_alteracao'];
 		}
 	}
 	
@@ -53,6 +54,7 @@ class clienteInformacoesModel extends model {
 			$this->ind_recebe_oferta 	  = $res['ind_recebe_oferta'];
 			$this->cod_cliente_tipo 	  = $res['cod_cliente_tipo'];
 			$this->cod_cliente 			  = $res['cod_cliente'];
+			$this->dat_alteracao          = $res['dat_alteracao'];
 		}
 	}
 }

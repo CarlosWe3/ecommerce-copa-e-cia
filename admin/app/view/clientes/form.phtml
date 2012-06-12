@@ -3,31 +3,31 @@
 <div class="box">
 	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
 </div>
-<form>
+<form method="post">
 	<div class="box">
 		<p class="input required">
 			<label>Nome:</label>
-			<input type="text" maxlength="255" class="input_min"  value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Data Nascimento:</label>
-			<input type="text" class="input_min dat"/>
+			<input type="text" class="input_min dat" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Telefone:</label>
-			<input type="text" class="input_min tel"/>
+			<input type="text" class="input_min tel" value="<?php echo isset($this->informacoes->num_telefone_fixo) ? $this->informacoes->num_telefone_fixo : null ?>" />
 		</p>
 		<p class="input">
 			<label>Celular:</xlabel>
-			<input type="text" class="input_min tel"/>
+			<input type="text" class="input_min tel" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input">
 			<label>Email:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Senha:</label>
-			<input type="text" maxlength="20" class="input_min"/>
+			<input type="text" maxlength="20" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Gênero:</label>
@@ -48,11 +48,11 @@
 	<div class="box">
 		<p class="input required">
 			<label>Nº RG:</label>
-			<input type="text" class="input_min rg"/>
+			<input type="text" class="input_min rg" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Nº CPF:</label>
-			<input type="text" class="input_min cpf"/>
+			<input type="text" class="input_min cpf" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Tipo:</label>
@@ -64,34 +64,34 @@
 		</p>
 		<p class="input required" id="cnpj">
 			<label>Nº CNPJ:</label>
-			<input type="text" class="input_min cnpj"/>
+			<input type="text" class="input_min cnpj" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 	</div>
 	
 	<div class="box">
 		<p class="input required">
 			<label>Endereço:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Numero:</label>
-			<input type="text" class="int input_min"/>
+			<input type="text" class="int input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Bairro:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input">
 			<label>Complemento:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input">
 			<label>Referência:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Cep:</label>
-			<input type="text" class="input_min cep"/>
+			<input type="text" class="input_min cep" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Cidade:</label>

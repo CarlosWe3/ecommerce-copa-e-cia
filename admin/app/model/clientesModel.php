@@ -20,11 +20,15 @@ class clientesModel extends model {
 		               C.des_email, 
 		               T.des_cliente_tipo,
 		               I.num_telefone_fixo, 
-		               I.num_telefone_celular
+		               I.num_telefone_celular,
+		               S.nom_status
 		        FROM {$this->tabela} as C, 
 					   cec_cliente_informacoes as I, 
-	                   cec_cliente_tipos as T
+	                   cec_cliente_tipos as T,
+	                   cec_status as S
 		        WHERE I.cod_cliente = C.cod_cliente
+		        AND S.cod_status = 1
+		        AND C.cod_status = S.cod_status
 		        AND I.cod_cliente_tipo = T.cod_cliente_tipo";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();

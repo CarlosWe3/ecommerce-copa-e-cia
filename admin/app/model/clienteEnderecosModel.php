@@ -47,4 +47,8 @@ class clienteEnderecosModel extends model {
 			$this->cod_cidade   		= $res['cod_cidade'];
 		}
 	}
+	
+	function alterar() {
+		
+	}
 }
