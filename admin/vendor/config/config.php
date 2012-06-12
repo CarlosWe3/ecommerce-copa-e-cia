@@ -5,7 +5,7 @@
 defined("USER_CON") 	? null : define("USER_CON", "root");
 defined("SERVIDOR_CON") ? null : define("SERVIDOR_CON", "localhost");
 defined("SENHA_CON") 	? null : define("SENHA_CON", "WE3SERVER01");
-defined("BD_CON") 		? null : define("BD_CON", "carlos");
+defined("BD_CON") 		? null : define("BD_CON", "copaecia");
 defined("TIPO_CON") 	? null : define("TIPO_CON", "mysql");
 defined("CONEXAO") 		? null : define("CONEXAO", true);
 /**

@@ -5,6 +5,14 @@ class clientesController extends controller {
 	}
 	
 	public function index() {
+		/*$sql  = " SELECT  
+				  FROM
+				  WHERE ";
+		$prep = $this -> conn -> prepare($sql);
+		$res  = $prep -> execute();
+		$res  = $this -> conn -> query($sql);
+		$this->_view->clientes = $res;
+			*/
 		$this->_view->titulo = "Clientes";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'check.js'));
 	}
