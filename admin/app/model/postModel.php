@@ -11,6 +11,4 @@ class postModel extends model {
 		$sql = "SELECT * FROM {$this->tabela}";
 		return $this->conn->query($sql);
 	}
-	
-	
 }

@@ -1,5 +1,4 @@
 <h2><?php echo $this->titulo; ?></h2>
-
 <div class="box">
 	<a href="<?php echo BASE_URL.'clientes/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
@@ -47,20 +46,22 @@
 				</tr>
 			</thead>
 			<tbody>
+			<?php foreach($this->res as $ln) { ?>
 				<tr>
 					<td class="tal width5"><input value="cod" name="check[]" type="checkbox"/></td>
-					<td class="tal">Código</td>
-					<td class="tal">Nome</td>
-					<td class="tal">E-mail</td>
-					<td class="tac">Telefones</td>
-					<td class="tal">Tipo</td>
+					<td class="tal"><?php echo '#'.$ln['cod_cliente']?></td>
+					<td class="tal"><?php echo $ln['nom_cliente']?></td>
+					<td class="tal"><?php echo $ln['des_email']?></td>
+					<td class="tac"><?php echo $ln['num_telefone_fixo'].'<br/>'.$ln['num_telefone_celular']; ?></td>
+					<td class="tal"><?php echo $ln['des_cliente_tipo']; ?></td>
 					<td class="tal width5">
-						<a href="<?php echo BASE_URL.'clientes/visualizar'; ?>" class="botao fl">Visualizar</a>
+						<a href="<?php echo BASE_URL.'clientes/visualizar/'.$ln['cod_cliente']; ?>" class="botao fl">Visualizar</a>
 					</td>
 					<td class="tal width5">
 						<a href="<?php echo BASE_URL.'clientes/alterar'; ?>" class="botao fl amarelo">Alterar</a>
 					</td>
-				</tr>
+				</tr>			
+			<?php } ?>
 			</tbody>
 		</table>
 		<table>

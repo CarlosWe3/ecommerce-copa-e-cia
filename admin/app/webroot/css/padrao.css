@@ -8,9 +8,16 @@ table {
 	text-shadow: 1px 1px 1px #CCCCCC;
 	margin: 5px auto;
 }
+
 thead {
 	background: #ffffff;
 }
+
+
+thead {
+	background: #ffffff;
+}
+
 th {
 	border:0;
 	border-bottom:2px solid #CCC;
@@ -100,7 +107,9 @@ form div.submit {
 label {
 	display: block;
 	font-size: 110%;
+
 	font-weight: bold;
+
 	margin-bottom:3px;
 }
 input, textarea {
@@ -110,15 +119,19 @@ input, textarea {
 	padding: 1%;
 	width:98%;
 }
+
 .input_min {
 	height: 5px;
 }
+
 select {
 	clear: both;
 	font-size: 120%;
 	vertical-align: text-bottom;
+
 	padding: 5px;
 	background: #f9f9f9;
+
 }
 select[multiple=multiple] {
 	width: 100%;
@@ -296,3 +309,4 @@ p.error em {
 /* Dimensões */
 .margin5 { margin: 5px; }
 .width5 { width: 5px; }
+.width500 {	width: 500px;} 

@@ -103,25 +103,26 @@ class view {
 			$msg  = isset($this->_msg) ? $this->_msg : false;
 		}
 		
-		if ($msg) {
-			switch ($this->_tipoMsg) {
-				case 'sucesso':
-					$classe = ' success';
-					break;
+		if ($msg) {	
+			$msg  = isset($this->_msg) ? $this->_msg : false;
+			if ($msg) {
+				switch ($this->_tipoMsg) {
+					case 'sucesso':
+						$classe = ' success';
+						break;
+						
+					case 'noticia':
+						$classe = ' notice';
+						break;
+						
+					case 'erro':
+						$classe = ' error';
+						break;
 					
-				case 'noticia':
-					$classe = ' notice';
-					break;
-					
-				case 'erro':
-					$classe = ' error';
-					break;
+				}
 				
+				echo "<p class=\"message{$classe}\">{$msg}</p>";
+				unset($classe,$erro);
 			}
-			
-			echo "<p class=\"message{$classe}\">{$msg}</p>";
-			unset($classe,$erro);
 		}
-	}
-       
-}
+}}

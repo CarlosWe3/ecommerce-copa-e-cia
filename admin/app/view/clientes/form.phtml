@@ -7,7 +7,7 @@
 	<div class="box">
 		<p class="input required">
 			<label>Nome:</label>
-			<input type="text" maxlength="255" class="input_min"/>
+			<input type="text" maxlength="255" class="input_min"  value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Data Nascimento:</label>

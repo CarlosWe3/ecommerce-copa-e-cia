@@ -65,5 +65,4 @@ class conexao {
 	public function __destruct() {
 		unset($this->conn);
 	}
-	
 }

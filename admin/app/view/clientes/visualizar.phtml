@@ -5,7 +5,73 @@
 </div>
 
 <div class="box">
-	<form>
-		<h2>Cliente #01 - Marcos Souza</h2>
-	</form>
+	<table>
+		<thead>
+			<tr>
+				<th class="tal"><h2>Nome</h2></th>
+				<th class="tal"><h2>Data Nascimento</h2></th>
+				<th class="tal"><h2>Telefones</h2></th>
+				<th class="tal"><h2>Email</h2></th>
+				<th class="tal"><h2>Gênero</h2></th>
+				<th class="tal"><h2>Rec. ofertas</h2></th>
+				<th class="tal"><h2>Tipo</h2></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="tal"><h2><?php echo $this->clientes->nom_cliente; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->informacoes->dat_nascimento; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->informacoes->num_telefone_fixo.'</br>'.$this->informacoes->num_telefone_celular; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->clientes->des_email; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->informacoes->ind_genero == 'M' ? 'Masculino' : 'Feminino'; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->informacoes->ind_recebe_oferta == 'S' ? 'Recebe Ofertas' : 'Não Recebe Ofertas'; ?></h2></td>
+				<td class="tal"><h2><?php echo $this->tipos->des_cliente_tipo; ?></h2></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="box">
+	<p class="input required disable">
+		<label>Nº RG:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo $this->informacoes->num_rg; ?>"/>
+	</p>
+	<p class="input required">
+		<label>Nº CPF:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo $this->informacoes->num_cpf; ?>"/>
+	</p>
+	
+	<?php if ($this->tipos->cod_cliente_tipo == 2) { ?>
+	<p class="input required" id="cnpj">
+		<label>Nº CNPJ:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo $this->informacoes->num_cnpj; ?>"/>
+	</p>
+	<?php } ?>
+</div>
+	
+<div class="box">
+	<p class="input required">
+		<label>Endereço:</label>
+		<input type="text" disabled="disabled" maxlength="255"  class="input_min width500" value="<?php echo $this->enderecos->des_endereco.' - '.$this->enderecos->num_endereco; ?>"/>
+	</p>
+	<p class="input required">
+		<label>Bairro:</label>
+		<input type="text" disabled="disabled" maxlength="255" class="input_min width500" value="<?php echo $this->enderecos->nom_bairro; ?>"/>
+	</p>
+	<p class="input">
+		<label>Complemento:</label>
+		<input type="text" disabled="disabled" maxlength="255" class="input_min width500" value="<?php echo $this->enderecos->des_complemento; ?>"/>
+	</p>
+	<p class="input">
+		<label>Referência:</label>
+		<input type="text" disabled="disabled" maxlength="255" class="input_min width500" value="<?php echo $this->enderecos->des_referencia; ?>"/>
+	</p>
+	<p class="input required">
+		<label>Cep:</label>
+		<input type="text" disabled="disabled" class="input_min cep width500" value="<?php echo $this->enderecos->num_cep; ?>"/>
+	</p>
+	<p class="input required">
+		<label>Cidade:</label>
+		<input type="text" disabled="disabled" class="input_min cep width500" value="<?php echo $this->cidades->nom_cidade.' - '.$this->estados->sig_estado; ?>"/>
+	</p>
 </div>
