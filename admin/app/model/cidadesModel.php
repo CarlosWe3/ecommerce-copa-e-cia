@@ -1,5 +1,5 @@
 <?php
-class clienteCidadesModel extends model {
+class cidadesModel extends model {
 	
 	public $tabela = "cec_cidades";
 	

@@ -4,6 +4,10 @@
 	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
 </div>
 
+<?php 
+	
+?>
+
 <div class="box">
 	<p class="input">
 		<label>Nome:</label>
@@ -11,15 +15,15 @@
 	</p>
 	<p class="input">
 		<label>Data Nascimento:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_nascimento) ? $this->informacoes->dat_nascimento : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_nascimento) ? data::data($this->informacoes->dat_nascimento) : null ?>" />
 	</p>
 	<p class="input">
 		<label>Telefone Fixo:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->num_telefone_fixo) ? $this->informacoes->num_telefone_fixo : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->informacoes->num_telefone_fixo) ? $this->informacoes->num_telefone_fixo : null ?>" />
 	</p>
 	<p class="input">
 		<label>Telefone Celular:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->num_telefone_celular) ? $this->informacoes->num_telefone_celular : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500 " value="<?php echo isset($this->informacoes->num_telefone_celular) ? $this->informacoes->num_telefone_celular : null ?>" />
 	</p>
 	<p class="input">
 		<label>E-mail:</label>
@@ -27,7 +31,7 @@
 	</p>
 	<p class="input">
 		<label>Gênero:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'M' ? 'Masculino' : 'Feminino' : null ?>" />
 	</p>
 	<p class="input">
 		<label>Tipo:</label>
@@ -35,15 +39,15 @@
 	</p>
 	<p class="input">
 		<label>Receber Ofertas:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->ind_recebe_oferta) ? $this->informacoes->ind_recebe_oferta : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->ind_recebe_oferta) ? $this->informacoes->ind_recebe_oferta == 'S' ? 'Recebe ofertas' : 'Não recebe ofertas' : null ?>" />
 	</p>
 	<p class="input">
 		<label>Data Cadastro:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->clientes->dat_cadastro) ? $this->clientes->dat_cadastro : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->clientes->dat_cadastro) ? data::dataTimeStamp($this->clientes->dat_cadastro) : null ?>" />
 	</p>
 	<p class="input">
-		<label>Data Alteração:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_alteracao) ? $this->informacoes->dat_alteracao : null ?>" />
+		<label>Data Última Alteração:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_alteracao) ? data::dataTimeStamp($this->informacoes->dat_alteracao) : null ?>" />
 	</p>	
 </div>
 

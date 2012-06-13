@@ -7,40 +7,40 @@
 	<div class="box">
 		<p class="input required">
 			<label>Nome:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="nom" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Data Nascimento:</label>
-			<input type="text" class="input_min dat" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="dat_nascimento" class="input_min dat" value="<?php echo isset($this->informacoes->dat_nascimento) ? data::data($this->informacoes->dat_nascimento) : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Telefone:</label>
-			<input type="text" class="input_min tel" value="<?php echo isset($this->informacoes->num_telefone_fixo) ? $this->informacoes->num_telefone_fixo : null ?>" />
+			<input type="text" name="num_tel" class="input_min tel" value="<?php echo isset($this->informacoes->num_telefone_fixo) ? $this->informacoes->num_telefone_fixo : null ?>" />
 		</p>
 		<p class="input">
 			<label>Celular:</xlabel>
-			<input type="text" class="input_min tel" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="num_cel" class="input_min tel" value="<?php echo isset($this->informacoes->num_telefone_celular) ? $this->informacoes->num_telefone_celular : null ?>" />
 		</p>
 		<p class="input">
 			<label>Email:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="des_email" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->des_email) ? $this->clientes->des_email : null ?>" />
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Senha:</label>
-			<input type="text" maxlength="20" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="password" name="des_senha" maxlength="20" id="senha" class="input_min" />
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Gênero:</label>
-			<select>
-				<option value"M">Masculino</option>
-				<option value="F">Feminino</option>
+			<select name="ind_genero">
+				<option value"M" <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'M' ? 'selected="selected"' : '' : null ?>>Masculino</option>
+				<option value="F" <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'F' ? 'selected="selected"' : '' : null ?>>Feminino</option>
 			</select>
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Receber Ofertas:</label>
-			<select>
-				<option>Sim</option>
-				<option>Não</option>
+			<select  name="ind_oferta">
+				<option <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_recebe_oferta == 'S' ? 'selected="selected"' : '' : null ?>>Sim</option>
+				<option <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_recebe_oferta == 'N' ? 'selected="selected"' : '' : null ?>>Não</option>
 			</select>
 		</p>
 	</div>	
@@ -48,65 +48,76 @@
 	<div class="box">
 		<p class="input required">
 			<label>Nº RG:</label>
-			<input type="text" class="input_min rg" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text"  name="num_rg" class="input_min rg" value="<?php echo isset($this->informacoes->num_rg) ? $this->informacoes->num_rg : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Nº CPF:</label>
-			<input type="text" class="input_min cpf" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text"  name="num_cpf" class="input_min cpf" value="<?php echo isset($this->informacoes->num_cpf) ? $this->informacoes->num_cpf : null ?>" />
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Tipo:</label>
 			<!-- verifica_pj esta em js/verifica_pj.js -->
-			<select onchange="verifica_pj(this.value);">
-				<option value="2">Pessoa Jurídica</option>
-				<option value="1">Pessoa Física</option>
+			<select onchange="verifica_pj(this.value);" name="ind_tipo">
+				<option value="2" <?php echo isset($this->informacoes->cod_cliente_tipo) ? $this->informacoes->cod_cliente_tipo == 2 ? 'selected="selected"' : '' : null ?>>Pessoa Jurídica</option>
+				<option value="1" <?php echo isset($this->informacoes->cod_cliente_tipo) ? $this->informacoes->cod_cliente_tipo == 1 ? 'selected="selected"' : '' : null ?>>Pessoa Física</option>
 			</select>
 		</p>
-		<p class="input required" id="cnpj">
+		
+		<p class="input required" id="cnpj" <?php echo isset($this->informacoes->cod_cliente_tipo) ? $this->informacoes->cod_cliente_tipo == 1 ? 'style="display: none;"' : '' : null ?>>
 			<label>Nº CNPJ:</label>
-			<input type="text" class="input_min cnpj" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="num_cnpj" class="input_min cnpj" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
 		</p>
 	</div>
 	
 	<div class="box">
 		<p class="input required">
 			<label>Endereço:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="des_endereco" maxlength="255" class="input_min" value="<?php echo isset($this->enderecos->des_endereco) ? $this->enderecos->des_endereco : null ?>" />
 		</p>
+		
 		<p class="input required">
 			<label>Numero:</label>
-			<input type="text" class="int input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" onkeyup="input_int(this);" name="num_endereco" class="input_min" value="<?php echo isset($this->enderecos->num_endereco) ? $this->enderecos->num_endereco : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Bairro:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="nom_bairro" maxlength="255" class="input_min" value="<?php echo isset($this->enderecos->nom_bairro) ? $this->enderecos->nom_bairro : null ?>" />
 		</p>
 		<p class="input">
 			<label>Complemento:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="des_complemento" maxlength="255" class="input_min" value="<?php echo isset($this->enderecos->des_complemento) ? $this->enderecos->des_complemento : null ?>" />
 		</p>
 		<p class="input">
 			<label>Referência:</label>
-			<input type="text" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="des_referencia" maxlength="255" class="input_min" value="<?php echo isset($this->enderecos->des_referencia) ? $this->enderecos->des_referencia : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Cep:</label>
-			<input type="text" class="input_min cep" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="num_cep" class="input_min cep" value="<?php echo isset($this->enderecos->num_cep) ? $this->enderecos->num_cep : null ?>" />
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Cidade:</label>
-			<select>
-				<option>cidade</option>
-				<option>cidade</option>
-				<option>cidade</option>
+			<select name="cod_cidade">
+			<?php foreach($this->todasCidades as $cidade) { ?> 
+				<?php 
+					if(isset($this->enderecos->cod_cidade) and $this->enderecos->cod_cidade == $cidade['cod_cidade']) {
+						$selected   = 'selected="selected"';
+						$cod_estado = $cidade['cod_estado'];
+				  	} else {
+						$selected   = '';
+						$cod_estado = '';
+				 	}
+				?>	
+				<option value="<?php echo $cidade['cod_cidade']?>" <?php echo $selected; ?>><?php echo $cidade['nom_cidade']?></option>
+			<?php } ?>
 			</select>
 		</p>
-		<p class="input required">
+		<p class="input">
 			<label>Estado:</label>
-			<select>
-				<option>estado</option>
-				<option>estado</option>
-				<option>estado</option>
+			<select name="cod_estado">
+			<?php foreach($this->todosEstados as $estados) { ?> 
+				<option value="<?php echo $estados['cod_estado']; ?>" <?php echo $estados['cod_estado'] == $cod_estado ? 'selected="selected"' : '' ?>><?php echo $estados['sig_estado'].' - '.$estados['nom_estado']; ?></option>
+			<?php } ?>
 			</select>
 		</p>
 	</div>

@@ -214,4 +214,23 @@ class model {
 		unset($i,$cond,$valor);
 		return $retorno;		
 	}
+	
+	/**
+	* Metodo que valida dados prenchidos.
+	* @author Guilherme Lessa - 13/06/12 17:25
+	* @param array $campos - Array contendo os campos que devem ser preenchidos obrigatóriamente.
+	* 		  string $msg - Mensagem que deve ser apresentada caso um dos campos esteja vazio.
+	* 		  string $tipo - tipo da mensagem (sucesso, erro, etc).       
+	* @return boleano - False caso exista algum campo vazio.
+	*/
+	function requerido($campos, $msg, $tipMsg) {
+		foreach($campos as $ln) {
+			if($ln == "") {
+				$this->_view->_msg = $msg; 
+				$this->_view->_tipoMsg = $tipMsg;
+				return false;
+				exit;
+			}
+		}	
+	}
 }

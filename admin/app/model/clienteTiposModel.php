@@ -19,7 +19,7 @@ class clienteTiposModel extends model {
 		}
 	}
 	
-	function setPeloCliente() {
+	function setTodos() {
 		$res = $this->procura('unico',array('cod_cliente'=>$this->cod_cliente));
 		
 		if ($res) {
