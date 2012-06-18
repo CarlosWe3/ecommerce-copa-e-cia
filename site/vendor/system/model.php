@@ -105,6 +105,16 @@ class model {
 	 * 						 'unico' - apenas um registro
 	 * 						 'ultimo' - ultimo registro
 	 * 						 'primeiro' - primeiro registro
+	 *
+	 * Exemplos:
+	 * 1-  	$res = $this->_{model}->procura() = SELECT * FROM {tabela};
+	 * ----------------------------------------------------------------------
+	 * 2-	$this->_{model}->id = 1
+	 *  	$res = $this->_{model}->procura('unico'); = SELECT * FROM {tabela} WHERE {chave_primária} = 1;
+	 * ----------------------------------------------------------------------
+	 * 3- $res = $this->_{model}->procura('todos',array('cod_status'=>1)) = SELECT * FROM {tabela} WHERE cod_status = 1
+	 * ----------------------------------------------------------------------
+	 *
 	 */
 	function procura($tipo='todos',$condicoes = array(),$debug=false) {
 		// Caso tenha id informado
