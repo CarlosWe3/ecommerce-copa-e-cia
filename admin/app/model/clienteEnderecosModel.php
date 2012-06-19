@@ -49,6 +49,30 @@ class clienteEnderecosModel extends model {
 	}
 	
 	function alterar() {
+		$sql = "UPDATE ".$this->tabela."
+				SET des_endereco   	= ?
+				   ,num_endereco    = ? 
+				   ,num_cep         = ?
+				   ,nom_bairro      = ?
+				   ,des_complemento = ?
+				   ,des_referencia  = ?
+				   ,cod_cidade 		= ?
+				WHERE cod_cliente 	= ?";
+		$prep = $this->conn->prepare($sql);
+		$valores = array($this->des_endereco,$this->num_endereco,$this->num_cep,$this->nom_bairro,$this->des_complemento,$this->des_referencia,$this->cod_cidade,$this->cod_cliente);
+		$prep->execute($valores);
+	}
+	
+	function excluirArray($array) {
+		$cod = '';
+		foreach($array as $ln) {
+			 $cod .= ",'$ln'"; 
+		} 
+		$cod = substr($cod, 1);
 		
+		$sql = 'DELETE FROM '.$this->tabela.' 
+				WHERE cod_cliente IN ('.$cod.')';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
 	}
 }

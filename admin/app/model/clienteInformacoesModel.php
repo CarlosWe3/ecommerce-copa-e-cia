@@ -57,4 +57,36 @@ class clienteInformacoesModel extends model {
 			$this->dat_alteracao          = $res['dat_alteracao'];
 		}
 	}
+	
+	function alterar() {
+		$sql = "UPDATE ".$this->tabela."
+				SET num_rg   		     = ?
+				   ,num_cpf              = ? 
+				   ,num_cnpj             = ?
+				   ,dat_alteracao        = ?
+				   ,ind_genero           = ?
+				   ,dat_nascimento       = ?
+				   ,num_telefone_fixo    = ?
+				   ,num_telefone_celular = ?
+				   ,ind_recebe_oferta    = ?
+				   ,cod_cliente_tipo     = ?
+				WHERE cod_cliente 		 = ?";
+		$prep = $this->conn->prepare($sql);
+		$valores = array($this->num_rg,$this->num_cpf,$this->num_cnpj,$this->dat_alteracao,$this->ind_genero,$this->dat_nascimento,$this->num_telefone_fixo,$this->num_telefone_celular,$this->ind_recebe_oferta,$this->cod_cliente_tipo,$this->cod_cliente);
+		$prep->execute($valores);
+		var_dump($prep->errorInfo());
+	}
+	
+	function excluirArray($array) {
+		$cod = '';
+		foreach($array as $ln) {
+			 $cod .= ",'$ln'"; 
+		} 
+		$cod = substr($cod, 1);
+		
+		$sql = 'DELETE FROM '.$this->tabela.' 
+				WHERE cod_cliente IN ('.$cod.')';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
 }

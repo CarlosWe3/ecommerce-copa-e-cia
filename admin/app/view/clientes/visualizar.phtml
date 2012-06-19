@@ -23,7 +23,7 @@
 	</p>
 	<p class="input">
 		<label>Telefone Celular:</label>
-		<input type="text" disabled="disabled" class="input_min width500 " value="<?php echo isset($this->informacoes->num_telefone_celular) ? $this->informacoes->num_telefone_celular : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->informacoes->num_telefone_celular) ? $this->informacoes->num_telefone_celular : null ?>" />
 	</p>
 	<p class="input">
 		<label>E-mail:</label>
@@ -36,6 +36,10 @@
 	<p class="input">
 		<label>Tipo:</label>
 		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->tipos->des_cliente_tipo) ? $this->tipos->des_cliente_tipo : null ?>" />
+	</p>
+	<p class="input">
+		<label>Status:</label>	
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->status->nom_status) ? $this->status->nom_status : null ?>" />
 	</p>
 	<p class="input">
 		<label>Receber Ofertas:</label>

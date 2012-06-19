@@ -3,7 +3,6 @@ class cidadesModel extends model {
 	
 	public $tabela = "cec_cidades";
 	
-	public $cod_cidade;
 	public $nom_cidade;
 	public $cod_estado;
 	

@@ -223,14 +223,35 @@ class model {
 	* 		  string $tipo - tipo da mensagem (sucesso, erro, etc).       
 	* @return boleano - False caso exista algum campo vazio.
 	*/
-	function requerido($campos, $msg, $tipMsg) {
+	function diferenteZero($campos) {
+		
 		foreach($campos as $ln) {
 			if($ln == "") {
-				$this->_view->_msg = $msg; 
-				$this->_view->_tipoMsg = $tipMsg;
 				return false;
 				exit;
 			}
-		}	
+		}
+		return true;
+		
+		//header("Location: jadbds.php");
+		
+	}
+	
+	/**
+	* Metodo que valida quantidade de caracteres de uma string (quantidade entre X e Y).
+	* Se a string não conter a quantidade de caracteres entre X e Y, retorna false
+	* @author Guilherme Lessa - 14/06/12 10:40
+	* @param  string $string - string que será contada.
+	* 		  int $x - numero mínimo de caracteres que a string deve conter. 
+	*         int $y - numero máximo de caracteres que a string deve conter.        
+	* @return boleano - False caso a string não contenha a quantidade de caractéres entre X e Y.
+	*/
+	function tam_string($string, $x, $y) {
+		$quantidade = strlen($string);
+		if($quantidade >= $x and $quantidade <= $y) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

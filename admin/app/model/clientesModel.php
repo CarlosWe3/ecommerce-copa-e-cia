@@ -9,6 +9,7 @@ class clientesModel extends model {
 	public $des_senha;
 	public $dat_cadastro;
 	public $cod_status;
+	public $ultimo_id; 	
 	
 	public function __construct() {
 		parent::__construct();
@@ -47,9 +48,64 @@ class clientesModel extends model {
 			$this->cod_status   = $res['cod_status'];
 		}
 	}
-	
-	/*
+		
 	function cadastrar() {
-		$sql = "insert into {$this->tabela} values ($this->nom_cliente,$thi)";
-	}*/
+		$sql = "insert into {$this->tabela} 
+				values ($this->nom_cliente, 
+						$this->des_email,
+						$this->des_senha,
+						$this->dat_cadastro,
+						$this->cod_status)";
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
+	
+	function selectArray($array) {
+		$cod = '';
+		foreach($array as $ln) {
+			 $cod .= ",'$ln'"; 
+		} 
+		$cod = substr($cod, 1);
+		
+		$sql = 'SELECT cod_cliente, 
+		               nom_cliente
+		        FROM '.$this->tabela.'
+		        WHERE cod_cliente IN ('.$cod.')';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+		return $prep->fetchAll();
+	}
+	
+	function alterar() {
+		$sql = "UPDATE ".$this->tabela." 
+				SET nom_cliente   = ?
+				   ,des_email     = ? 
+				   ,cod_status    = ?
+				WHERE cod_cliente = ? ";
+		$prep = $this->conn->prepare($sql);
+		$valores = array($this->nom_cliente, $this->des_email, $this->cod_status, $this->cod_cliente);
+		$prep->execute($valores);
+		
+		if($this->des_senha) {
+	   		$sql = "UPDATE ".$this->tabela." 
+	   				SET des_senha     = ?
+				    WHERE cod_cliente = ? ";
+			$prep = $this->conn->prepare($sql);
+			$valores = array($this->des_senha, $this->cod_cliente);
+			$prep->execute($valores);
+		}
+	}
+	
+	function excluirArray($array) {
+		$cod = '';
+		foreach($array as $ln) {
+			 $cod .= ",'$ln'"; 
+		} 
+		$cod = substr($cod, 1);
+		
+		$sql = 'DELETE FROM '.$this->tabela.' 
+				WHERE cod_cliente IN ('.$cod.')';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
 }

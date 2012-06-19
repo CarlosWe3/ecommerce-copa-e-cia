@@ -33,7 +33,7 @@ class conexao {
 		$encode 	= $this->encode;
 		$Conn 		= false;
 		/*
-		* Caso tenha que implementar o PDO em outro banco de dados, inclir mais um Case mudando a conexão para o formato que necessitava.
+		* Caso tenha que implementar o PDO em outro banco de dados, incluir mais um Case mudando a conexão para o formato que necessitava.
 		*/
 		switch ($tip_bd) {
 			case 'mysql':			

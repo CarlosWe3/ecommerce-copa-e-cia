@@ -1,5 +1,4 @@
 <h2><?php echo $this->titulo; ?></h2>
-
 <div class="box">
 	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
 </div>
@@ -38,13 +37,20 @@
 		</p>
 		<p class="input">
 			<label>Receber Ofertas:</label>
-			<select  name="ind_oferta">
-				<option <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_recebe_oferta == 'S' ? 'selected="selected"' : '' : null ?>>Sim</option>
-				<option <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_recebe_oferta == 'N' ? 'selected="selected"' : '' : null ?>>Não</option>
+			<select name="ind_oferta">
+				<option value="S" <?php echo isset($this->informacoes->ind_recebe_oferta) ? $this->informacoes->ind_recebe_oferta == 'S' ? 'selected="selected"' : '' : null ?>>Sim</option>
+				<option value="N" <?php echo isset($this->informacoes->ind_recebe_oferta) ? $this->informacoes->ind_recebe_oferta == 'N' ? 'selected="selected"' : '' : null ?>>Não</option>
+			</select>
+		</p>
+		<p class="input">
+			<label>Status:</label>
+			<select name="ind_status">
+			<?php foreach($this->todosStatus as $status) { ?> 
+				<option value="<?php echo $status['cod_status']; ?>" <?php echo isset($this->clientes->cod_status) ? $status['cod_status'] == $this->clientes->cod_status ? 'selected="selected"' : '' : null ?>><?php echo $status['nom_status']; ?></option>
+			<?php } ?>
 			</select>
 		</p>
 	</div>	
-	
 	<div class="box">
 		<p class="input required">
 			<label>Nº RG:</label>
@@ -62,22 +68,19 @@
 				<option value="1" <?php echo isset($this->informacoes->cod_cliente_tipo) ? $this->informacoes->cod_cliente_tipo == 1 ? 'selected="selected"' : '' : null ?>>Pessoa Física</option>
 			</select>
 		</p>
-		
 		<p class="input required" id="cnpj" <?php echo isset($this->informacoes->cod_cliente_tipo) ? $this->informacoes->cod_cliente_tipo == 1 ? 'style="display: none;"' : '' : null ?>>
 			<label>Nº CNPJ:</label>
-			<input type="text" name="num_cnpj" class="input_min cnpj" value="<?php echo isset($this->clientes->nom_cliente) ? $this->clientes->nom_cliente : null ?>" />
+			<input type="text" name="num_cnpj" class="input_min cnpj" value="<?php echo isset($this->informacoes->num_cnpj) ? $this->informacoes->num_cnpj : null ?>" />
 		</p>
 	</div>
-	
 	<div class="box">
 		<p class="input required">
 			<label>Endereço:</label>
 			<input type="text" name="des_endereco" maxlength="255" class="input_min" value="<?php echo isset($this->enderecos->des_endereco) ? $this->enderecos->des_endereco : null ?>" />
 		</p>
-		
 		<p class="input required">
 			<label>Numero:</label>
-			<input type="text" onkeyup="input_int(this);" name="num_endereco" class="input_min" value="<?php echo isset($this->enderecos->num_endereco) ? $this->enderecos->num_endereco : null ?>" />
+			<input type="text" onkeyup="input_int(this);" maxlength="11" name="num_endereco" class="input_min" value="<?php echo isset($this->enderecos->num_endereco) ? $this->enderecos->num_endereco : null ?>" />
 		</p>
 		<p class="input required">
 			<label>Bairro:</label>
@@ -94,35 +97,45 @@
 		<p class="input required">
 			<label>Cep:</label>
 			<input type="text" name="num_cep" class="input_min cep" value="<?php echo isset($this->enderecos->num_cep) ? $this->enderecos->num_cep : null ?>" />
+		</p>	
+		<p class="input">
+			<label>Estado:</label>
+			<select name="cod_estado" onchange="geraCidades('<?php echo BASE_URL . 'cidades/geraCidades' ?>',this.value); ">
+			<?php 
+				if(isset($this->enderecos->cod_cidade)) {
+					//captura o estado do cliente
+					foreach($this->todasCidades as $cidade) {
+						if ($this->enderecos->cod_cidade == $cidade['cod_cidade']) {
+							$cod_estado = $cidade['cod_estado'];
+						}
+					} 
+				}
+				
+				foreach($this->todosEstados as $estados) { ?> 
+				<option value="<?php echo $estados['cod_estado']; ?>" <?php echo isset($cod_estado) ? $estados['cod_estado'] == $cod_estado ? 'selected="selected"' : '': null ?>><?php echo $estados['sig_estado'].' - '.$estados['nom_estado']; ?></option>
+				<?php } ?>
+			</select>
 		</p>
 		<p class="input">
 			<label>Cidade:</label>
-			<select name="cod_cidade">
-			<?php foreach($this->todasCidades as $cidade) { ?> 
-				<?php 
-					if(isset($this->enderecos->cod_cidade) and $this->enderecos->cod_cidade == $cidade['cod_cidade']) {
-						$selected   = 'selected="selected"';
-						$cod_estado = $cidade['cod_estado'];
-				  	} else {
-						$selected   = '';
-						$cod_estado = '';
-				 	}
-				?>	
-				<option value="<?php echo $cidade['cod_cidade']?>" <?php echo $selected; ?>><?php echo $cidade['nom_cidade']?></option>
-			<?php } ?>
-			</select>
-		</p>
-		<p class="input">
-			<label>Estado:</label>
-			<select name="cod_estado">
-			<?php foreach($this->todosEstados as $estados) { ?> 
-				<option value="<?php echo $estados['cod_estado']; ?>" <?php echo $estados['cod_estado'] == $cod_estado ? 'selected="selected"' : '' ?>><?php echo $estados['sig_estado'].' - '.$estados['nom_estado']; ?></option>
-			<?php } ?>
+			<select name="cod_cidade" id="cidades">
+			<!-- se esta alterando, então existe dados, entra nesse if -->	
+			<?php if(isset($cod_estado) and isset($this->enderecos->cod_cidade)) { 
+				foreach($this->todasCidades as $cidade) {
+					if($cidade['cod_estado'] == $cod_estado) {
+			?>
+				<option value="<?php echo $cidade['cod_cidade']; ?>" <?php echo $this->enderecos->cod_cidade == $cidade['cod_cidade'] ? 'selected="selected"' : '' ?>><?php echo $cidade['nom_cidade']?></option>
+			<!-- se esta cadastrando, então não existe dados, entra nesse if -->	
+			<?php } } } else {
+				foreach($this->todasCidades as $cidade) {
+					if($cidade['cod_estado'] == 1) {
+			?>
+				<option value="<?php echo $cidade['cod_cidade']; ?>"><?php echo $cidade['nom_cidade']?></option>
+			<?php } } } ?>
 			</select>
 		</p>
 	</div>
-	
 	<div class="box">
-		<input class="botao fr" type="submit" value="Cadastrar"/>
+		<input class="botao fr" name="cadastrar" type="submit" value="Cadastrar"/>
 	</div>
 </form>

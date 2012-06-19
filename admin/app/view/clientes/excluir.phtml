@@ -6,15 +6,19 @@
 
 <form method="post">
 	<div class="box">
-		<p class="error">Você irá excluir os seguintes clientes:</br></br>
-			#01 - Marcos Souza</br>
-			#02 - Juliano Silva</br>
-			#05 - Rafaela Luisa</br>
-			#09 - Marcos Paulo
-			</br></br>Esta exclusão não podera ser desfeita!
+		<p class="error">
+			Você irá excluir o(s) seguintes cliente(s):</br>
+			<?php 
+				foreach($this->selecionado as $ln) {
+					echo '#'.$ln['cod_cliente'].' - '.$ln['nom_cliente'].'<br/>';
+				}
+			?>
+			Esta exclusão não poderá ser desfeita.
 		</p>
 	</div>
 	<div class="box">
-		<input class="botao fr vermelho" name="confirma_excluir" type="submit" value="Excluir"/>
+		<input type="hidden" name="check" value="<?php echo $this->check; ?>"/>
+		<input class="botao fr vermelho" name="confirma" type="submit" value="Excluir"/>
+		<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl amarelo">Cancelar</a>
 	</div>
 </form>
