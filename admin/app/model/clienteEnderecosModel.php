@@ -48,6 +48,22 @@ class clienteEnderecosModel extends model {
 		}
 	}
 	
+	function cadastrar() {
+		$sql = "insert into ".$this->tabela." 
+				(des_endereco, num_endereco, num_cep, nom_bairro, des_complemento, 
+				des_referencia, cod_cliente, cod_cidade) 
+				values ('".$this->des_endereco."',
+						'".$this->num_endereco."',
+						'".$this->num_cep."',
+						'".$this->nom_bairro."',
+						'".$this->des_complemento."',
+						'".$this->des_referencia."',
+						'".$this->cod_cliente."',
+						'".$this->cod_cidade."')";
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
+	
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela."
 				SET des_endereco   	= ?

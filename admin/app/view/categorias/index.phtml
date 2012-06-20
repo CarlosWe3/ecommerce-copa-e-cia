@@ -1,0 +1,64 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'categorias/cadastrar'; ?>" class="botao fr">Cadastrar</a>
+</div>
+
+<?php if(count($this->res) != 0) { ?>
+<form method="post" action="<?php echo BASE_URL.'categorias/excluir'; ?>">
+	<div class="box">
+		<table>
+			<thead>
+				<tr>
+					<th class="tal"></th>
+					<th class="tal">Código</th>
+					<th class="tal">Nome</th>
+					<th class="tal">Url</th>
+					<th class="tal">Visualizar</th>
+					<th class="tal">Alterar</th>
+				</tr>
+			</thead>
+			<tbody>
+			<?php foreach($this->res as $ln) { ?>
+				<tr>
+					<td class="tal width5"><input value="<?php echo $ln['cod_categoria']; ?>" name="check[]" type="checkbox"/></td>
+					<td class="tal"><?php echo '#'.$ln['cod_categoria']?></td>
+					<td class="tal"><?php echo $ln['nom_categoria']?></td>
+					<td class="tal"><?php echo $ln['url_slug']?></td>
+					<td class="tal width5">
+						<a href="<?php echo BASE_URL.'categorias/visualizar/'.$ln['cod_categoria']; ?>" class="botao fl">Visualizar</a>
+					</td>
+					<td class="tal width5">
+						<a href="<?php echo BASE_URL.'categorias/alterar/'.$ln['cod_categoria']; ?>" class="botao fl amarelo">Alterar</a>
+					</td>
+				</tr>			
+			<?php } ?>
+			</tbody>
+		</table>
+		
+		<table>
+			<tbody>
+				<!-- check.js esta em webroot/js -->
+				<td class="tal"><input onclick="check();" type="checkbox"/>Selecionar todos</td>
+				
+				<td class="tac">
+					<button class="botao_pg">Anterior</button>					
+			
+					<button class="botao_pg">1</button>			
+				
+					<button class="botao_pg select_pg">2</button>
+				
+					<button class="botao_pg">3</button>
+									
+					<button class="botao_pg">Próximo</button>
+				</td>
+				<td class="tar"><input class="botao fr vermelho" type="submit" name="excluir" value="Excluir selecionados"/></td>
+			</tbody>
+		</table>
+	</div>
+</form>
+<?php } ?>
+<?php 
+	//destroi sessão de mensagens para quando refresh não continuar exibindo mensagens
+	unset($_SESSION['_msg']);
+?>

@@ -4,10 +4,6 @@
 	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
 </div>
 
-<?php 
-	
-?>
-
 <div class="box">
 	<p class="input">
 		<label>Nome:</label>
@@ -51,7 +47,7 @@
 	</p>
 	<p class="input">
 		<label>Data Última Alteração:</label>
-		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_alteracao) ? data::dataTimeStamp($this->informacoes->dat_alteracao) : null ?>" />
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->informacoes->dat_alteracao) ? $this->clientes->dat_cadastro == $this->informacoes->dat_alteracao ? 'Não houve nenhuma alteração desde o cadastro.' : data::dataTimeStamp($this->informacoes->dat_alteracao) : null ?>" />
 	</p>	
 </div>
 

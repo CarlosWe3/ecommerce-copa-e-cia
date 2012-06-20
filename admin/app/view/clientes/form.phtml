@@ -24,14 +24,14 @@
 			<label>Email:</label>
 			<input type="text" name="des_email" maxlength="255" class="input_min" value="<?php echo isset($this->clientes->des_email) ? $this->clientes->des_email : null ?>" />
 		</p>
-		<p class="input">
-			<label>Senha:</label>
-			<input type="password" name="des_senha" maxlength="20" id="senha" class="input_min" />
+		<p class="input <?php echo $this->required; ?>">
+			<label>Senha: (mínimo de 6 caractéres)</label>
+			<input type="password" name="des_senha" maxlength="20" id="senha" class="input_min"/>
 		</p>
 		<p class="input">
 			<label>Gênero:</label>
 			<select name="ind_genero">
-				<option value"M" <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'M' ? 'selected="selected"' : '' : null ?>>Masculino</option>
+				<option value="M" <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'M' ? 'selected="selected"' : '' : null ?>>Masculino</option>
 				<option value="F" <?php echo isset($this->informacoes->ind_genero) ? $this->informacoes->ind_genero == 'F' ? 'selected="selected"' : '' : null ?>>Feminino</option>
 			</select>
 		</p>

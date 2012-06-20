@@ -7,6 +7,14 @@ class clientesController extends controller {
 	}
 	
 	public function index() {
+		if(isset($_POST['buscar'])) {
+			$this->clientes->buscar_nom   = $_POST['buscar_nome'];
+			$this->clientes->buscar_email = $_POST['buscar_email'];
+			$this->clientes->buscar_rg    = $_POST['buscar_rg'];
+			$this->clientes->buscar_cpf   = $_POST['buscar_cpf'];
+			$this->clientes->buscar_cnpj  = $_POST['buscar_cnpj'];
+		}
+		
 		$this->_view->res = $this->clientes->getListagem();
 		$this->_view->titulo = "Clientes";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'check.js'));
@@ -15,6 +23,7 @@ class clientesController extends controller {
 	public function cadastrar() {
 		$this->_view->titulo = "Clientes > Cadastrar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'verifica_pj.js', 'input_int.js', 'geraCidades.js'));
+		$this->_view->required  = 'required';
 		
 		$this->loadModel('cidades');
 		$this->_view->todasCidades = $this->cidades->procura('todos');
@@ -54,12 +63,12 @@ class clientesController extends controller {
 			$cod_cidade 	 = $_POST['cod_cidade'];
 			$cod_estado 	 = $_POST['cod_estado'];
 		
-			$campos = array($nom,$dat_nascimento,$num_tel,$num_rg,$num_cpf,$des_endereco,$num_endereco,$nom_bairro,$num_cep);
+			$campos = array($nom,$dat_nascimento,$num_tel,$_POST['des_senha'],$num_rg,$num_cpf,$des_endereco,$num_endereco,$nom_bairro,$num_cep);
 		    $diferenteZero = model::diferenteZero($campos); //verifica se todos os campos do array contem valor
 							
-			if($_POST['des_senha']) {//so verifica tamanho da senha se houver senha
+			if($_POST['des_senha']) { //so verifica tamanho da senha se houver senha
 				$tamSenha = model::tam_string($_POST['des_senha'], 6, 20); //verifica tamanho da senha de min 6 e max 20
-			} else {//então se não houver senha, ela automaticamente é true
+			} else { //então se não houver senha, ela automaticamente é true
 				$tamSenha = true;
 			}
 
@@ -76,7 +85,7 @@ class clientesController extends controller {
 				$this->clientes->dat_cadastro = time();
 				$this->clientes->cod_status   = $ind_status;
 				$this->clientes->cadastrar();
-				$this->clientes->ultimo_id    = $this->_clientes->conn->lastInsertId();
+				$this->clientes->ultimo_id    = $this->clientes->conn->lastInsertId();
 				
 				$this->loadModel('clienteInformacoes');
 				$this->clienteInformacoes->num_rg 				= $num_rg;
@@ -89,8 +98,8 @@ class clientesController extends controller {
 				$this->clienteInformacoes->num_telefone_celular = $num_cel;
 				$this->clienteInformacoes->ind_recebe_oferta   	= $ind_oferta;
 				$this->clienteInformacoes->cod_cliente_tipo 	= $ind_tipo;
-				$this->clienteInformacoes->cod_cliente			= 8;
-				//$this->clienteInformacoes->cadastrar();
+				$this->clienteInformacoes->cod_cliente			= $this->clientes->ultimo_id;
+				$this->clienteInformacoes->cadastrar();
 				
 				$this->loadModel('clienteEnderecos');	
 				$this->clienteEnderecos->des_endereco 	 = $des_endereco;
@@ -99,9 +108,9 @@ class clientesController extends controller {
 				$this->clienteEnderecos->nom_bairro   	 = $nom_bairro;
 				$this->clienteEnderecos->des_complemento = $des_complemento;
 				$this->clienteEnderecos->des_referencia  = $des_referencia;
-				$this->clienteEnderecos->cod_cliente	 = 8;
+				$this->clienteEnderecos->cod_cliente	 = $this->clientes->ultimo_id;
 				$this->clienteEnderecos->cod_cidade      = $cod_cidade;
-				//$this->clienteEnderecos->cadastrar();
+				$this->clienteEnderecos->cadastrar();
 				
 				$this->_view->_msg 	   = 'Cliente cadastrado com sucesso!'; 
 				$this->_view->_tipoMsg = 'sucesso';
@@ -198,11 +207,12 @@ class clientesController extends controller {
 				$num_rg 		 = $_POST['num_rg'];
 				$num_cpf 		 = $_POST['num_cpf'];
 				$ind_genero  	 = $_POST['ind_genero'];
-				$ind_tipo 		 = $_POST['ind_tipo'];
 				$num_cnpj 		 = $_POST['num_cnpj'];
 				//caso nao preencha cnpj, sempre será pessoa fisica (tipo = 1)
 				if(!$_POST['num_cnpj']) {
 					$ind_tipo = 1;
+				} else {
+					$ind_tipo 	 = $_POST['ind_tipo'];
 				}
 				$des_endereco 	 = $_POST['des_endereco'];
 				$num_endereco 	 = (int)$_POST['num_endereco'];

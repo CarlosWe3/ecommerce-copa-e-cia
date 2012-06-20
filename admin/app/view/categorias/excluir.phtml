@@ -1,16 +1,16 @@
 <h2><?php echo $this->titulo; ?></h2>
 
 <div class="box">
-	<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl">Voltar</a>
+	<a href="<?php echo BASE_URL.'categorias'; ?>" class="botao fl">Voltar</a>
 </div>
 
 <form method="post">
 	<div class="box">
 		<p class="error">
-			Você irá excluir <?php echo count($this->selecionado); ?> cliente(s) definitivamente:</br>
+			Você irá excluir <?php echo count($this->selecionado); ?> categoria(s) definitivamente:</br>
 			<?php 
 				foreach($this->selecionado as $ln) {
-					echo '#'.$ln['cod_cliente'].' - '.$ln['nom_cliente'].'<br/>';
+					echo '#'.$ln['cod_categoria'].' - '.$ln['nom_categoria'].'<br/>';
 				}
 			?>
 		</p>
@@ -18,6 +18,6 @@
 	<div class="box">
 		<input type="hidden" name="check" value="<?php echo $this->check; ?>"/>
 		<input class="botao fr vermelho" name="confirma" type="submit" value="Excluir"/>
-		<a href="<?php echo BASE_URL.'clientes'; ?>" class="botao fl amarelo">Cancelar</a>
+		<a href="<?php echo BASE_URL.'categorias'; ?>" class="botao fl amarelo">Cancelar</a>
 	</div>
 </form>

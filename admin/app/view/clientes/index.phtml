@@ -1,35 +1,37 @@
 <h2><?php echo $this->titulo; ?></h2>
+
 <div class="box">
 	<a href="<?php echo BASE_URL.'clientes/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
-<?php if(count($this->res) != 0) { ?>
+
 <form method="post">
 	<div class="box">
-			<h2>Buscar clientes:</h2>
-			<p class="fl input margin5">
-				<label>Nome:</label>
-				<input type="text"/>
-			</p>
-			<p class="fl input margin5">
-				<label>E-mail:</label>
-				<input type="text"/>
-			</p>
-			<p class="fl input margin5">
-				<label>Nº RG:</label>
-				<input type="text" class="rg"/>
-			</p>
-			<p class="fl input margin5">
-				<label>Nº CPF:</label>
-				<input type="text" class="cpf"/>
-			</p>
-			<p class="fl input margin5">
-				<label>Nº CNPJ:</label>
-				<input type="text" class="cnpj"/>
-			</p>
-			<input class="botao fl" name="buscar" type="submit" value="Buscar"/>
+		<h2>Buscar clientes:</h2>
+		<p class="fl input margin5">
+			<label>Nome:</label>
+			<input type="text" name="buscar_nome"/>
+		</p>
+		<p class="fl input margin5">
+			<label>E-mail:</label>
+			<input type="text" name="buscar_email"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº RG:</label>
+			<input type="text" class="rg" name="buscar_rg"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº CPF:</label>
+			<input type="text" class="cpf" name="buscar_cpf"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Nº CNPJ:</label>
+			<input type="text" class="cnpj" name="buscar_cnpj"/>
+		</p>
+		<input class="botao fl" name="buscar" type="submit" value="Buscar"/>
 	</div>
 </form>
 
+<?php if(count($this->res) != 0) { ?>
 <form method="post" action="<?php echo BASE_URL.'clientes/excluir'; ?>">
 	<div class="box">
 		<table>
@@ -64,11 +66,23 @@
 			<?php } ?>
 			</tbody>
 		</table>
+		
 		<table>
-			
 			<tbody>
 				<!-- função check esta em js/check.js -->
 				<td class="tal"><input onclick="check();" type="checkbox"/>Selecionar todos</td>
+				
+				<td class="tac">
+					<button class="botao_pg">Anterior</button>					
+			
+					<button class="botao_pg">1</button>			
+				
+					<button class="botao_pg select_pg">2</button>
+				
+					<button class="botao_pg">3</button>
+									
+					<button class="botao_pg">Próximo</button>
+				</td>
 				<td class="tar"><input class="botao fr vermelho" type="submit" name="excluir" value="Excluir selecionados"/></td>
 			</tbody>
 		</table>

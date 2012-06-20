@@ -1,0 +1,28 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'categorias'; ?>" class="botao fl">Voltar</a>
+</div>
+
+<div class="box">
+	<p class="input">
+		<label>Nome:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->categorias->nom_categoria) ? $this->categorias->nom_categoria : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Descrição:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->categorias->des_categoria) ? $this->categorias->des_categoria : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Texto:</label>
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->categorias->txt_categoria) ? $this->categorias->txt_categoria : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Url:</label>
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->categorias->url_slug) ? $this->categorias->url_slug : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Status:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->status->nom_status) ? $this->status->nom_status : null ?>"/>
+	</p>
+</div>

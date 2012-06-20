@@ -1,0 +1,40 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'categorias'; ?>" class="botao fl">Voltar</a>
+</div>
+
+<form method="post">
+	<div class="box">
+		<p class="input required">
+			<label>Nome:</label>
+			<input type="text" name="nom_categoria" maxlength="255" class="input_min" value="<?php echo isset($this->categorias->nom_categoria) ? $this->categorias->nom_categoria : null ?>"/>
+		</p>
+		<p class="input ">
+			<label>Descrição:</label>
+			<input type="text" name="des_categoria" maxlength="255" class="input_min" value="<?php echo isset($this->categorias->des_categoria) ? $this->categorias->des_categoria : null ?>"/>
+		</p>
+		<p class="input">
+			<label>Texto:</label>
+			<textarea name="txt_categoria" class="textarea"><?php echo isset($this->categorias->txt_categoria) ? $this->categorias->txt_categoria : null ?></textarea>
+		</p>
+		<p class="input required">
+			<label>Slug:
+				<a onmouseover="Tip('<strong>Slug</strong> - Defina uma palavra chave para esta categoria. Ela ajudará os buscadores, como o Google por exemplo, a encontrar seus produtos!')" onmouseout="UnTip()">(o que é?)</a>
+			</label>
+			
+			<input type="text" name="url_slug" maxlength="255" class="input_min" value="<?php echo isset($this->categorias->url_slug) ? $this->categorias->url_slug : null ?>"/>
+		</p>
+		<p class="input">
+			<label>Status:</label>
+			<select name="ind_status">
+			<?php foreach($this->todosStatus as $status) { ?> 
+				<option value="<?php echo $status['cod_status']; ?>" <?php echo isset($this->categorias->cod_status) ? $status['cod_status'] == $this->categorias->cod_status ? 'selected="selected"' : '' : null ?>><?php echo $status['nom_status']; ?></option>
+			<?php } ?>
+			</select>
+		</p>
+	</div>
+	<div class="box">
+		<input class="botao fr" name="cadastrar" type="submit" value="Cadastrar"/>
+	</div>
+</form>

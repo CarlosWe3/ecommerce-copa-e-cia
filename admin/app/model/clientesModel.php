@@ -11,11 +11,38 @@ class clientesModel extends model {
 	public $cod_status;
 	public $ultimo_id; 	
 	
+	public $buscar_nom;
+	public $buscar_email;
+	public $buscar_rg;
+	public $buscar_cpf;
+	public $buscar_cnpj;
+	
 	public function __construct() {
 		parent::__construct();
 	}
-	
+		
 	public function getListagem() {
+		$busca = '';
+		if($this->buscar_nom) {
+			$busca .= " AND C.nom_cliente = '".$this->buscar_nom."' ";
+		}
+		
+		if($this->buscar_email) {
+			$busca .= " AND C.des_email = '".$this->buscar_email."' ";
+		}
+		
+		if($this->buscar_rg) {
+			$busca .= " AND I.num_rg = '".$this->buscar_rg."' ";
+		}
+		
+		if($this->buscar_cpf) {
+			$busca .= " AND I.num_cpf = '".$this->buscar_cpf."' ";
+		}
+		
+		if($this->buscar_cnpj) {
+			$busca .= " AND I.num_cnpj = '".$this->buscar_cnpj."' ";
+		}
+		
 		$sql = "SELECT C.cod_cliente, 
 		               C.nom_cliente, 
 		               C.des_email, 
@@ -23,14 +50,15 @@ class clientesModel extends model {
 		               I.num_telefone_fixo, 
 		               I.num_telefone_celular,
 		               S.nom_status
-		        FROM {$this->tabela} as C, 
+		        FROM ".$this->tabela." as C, 
 					   cec_cliente_informacoes as I, 
 	                   cec_cliente_tipos as T,
 	                   cec_status as S
 		        WHERE I.cod_cliente = C.cod_cliente
-		        AND S.cod_status = 1
+		        ".$busca."
 		        AND C.cod_status = S.cod_status
-		        AND I.cod_cliente_tipo = T.cod_cliente_tipo";
+		        AND I.cod_cliente_tipo = T.cod_cliente_tipo
+		        ORDER BY C.cod_cliente DESC";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
 		return $prep->fetchAll();
@@ -50,12 +78,13 @@ class clientesModel extends model {
 	}
 		
 	function cadastrar() {
-		$sql = "insert into {$this->tabela} 
-				values ($this->nom_cliente, 
-						$this->des_email,
-						$this->des_senha,
-						$this->dat_cadastro,
-						$this->cod_status)";
+		$sql = "insert into ".$this->tabela." 
+				(nom_cliente, des_email, des_senha, dat_cadastro, cod_status) 
+				values ('".$this->nom_cliente."',
+						'".$this->des_email."',
+						'".$this->des_senha."',
+						'".$this->dat_cadastro."',
+						'".$this->cod_status."')";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
 	}

@@ -34,7 +34,7 @@
 				<li><a href="#">Catálogo ⇣</a>
 					<ul>
 						<li><a href="#">Produtos</a></li>
-						<li><a href="#">Categorias</a></li>
+						<li><a href="<?php echo BASE_URL.'categorias'; ?>">Categorias</a></li>
 						<li><a href="#">Tags</a></li>
 					</ul>					
 				</li>
