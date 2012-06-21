@@ -8,7 +8,7 @@
 	<div class="box">
 		<p class="input required">
 			<label>Nome:</label>
-			<input type="text" name="nom_categoria" maxlength="255" class="input_min" value="<?php echo isset($this->categorias->nom_categoria) ? $this->categorias->nom_categoria : null ?>"/>
+			<input type="text" name="nom_categoria" maxlength="255" class="input_min" onkeyup="geraSlug(this.value)" value="<?php echo isset($this->categorias->nom_categoria) ? $this->categorias->nom_categoria : null ?>"/>
 		</p>
 		<p class="input ">
 			<label>Descrição:</label>
@@ -20,10 +20,10 @@
 		</p>
 		<p class="input required">
 			<label>Slug:
-				<a onmouseover="Tip('<strong>Slug</strong> - Defina uma palavra chave para esta categoria. Ela ajudará os buscadores, como o Google por exemplo, a encontrar seus produtos!')" onmouseout="UnTip()">(o que é?)</a>
+				<?php $mensagemSlug = "<strong>Slug</strong></br>Defina palavras chave para esta categoria. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
+				<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
 			</label>
-			
-			<input type="text" name="url_slug" maxlength="255" class="input_min" value="<?php echo isset($this->categorias->url_slug) ? $this->categorias->url_slug : null ?>"/>
+			<input type="text" name="url_slug" maxlength="255" class="input_min campoSlug" onkeyup="geraSlug(this.value)" value="<?php echo isset($this->categorias->url_slug) ? $this->categorias->url_slug : null ?>"/>
 		</p>
 		<p class="input">
 			<label>Status:</label>

@@ -6,9 +6,16 @@ class categoriasController extends controller {
 	}
 	
 	public function index() {
+		$this->_view->script = html::script(array('toolTip.js', 'check.js', 'geraSlug.js'));
 		$this->_view->titulo = "Categorias";
+		
+		if(isset($_POST['buscar'])) {
+			$this->categorias->buscar_nom   = $_POST['buscar_nom'];
+			$this->categorias->buscar_des   = $_POST['buscar_des'];
+			$this->categorias->buscar_slug  = $_POST['buscar_slug'];
+		}
+		
 		$this->_view->res = $this->categorias->getListagem();
-		$this->_view->script = html::script(array('check.js'));
 	}
 	
 	public function visualizar($id = false) {
@@ -55,7 +62,7 @@ class categoriasController extends controller {
 	
 	public function alterar($id = false) {
 		$this->_view->titulo = "Categorias > Alterar";
-		$this->_view->script = html::script(array('toolTip.js'));
+		$this->_view->script = html::script(array('toolTip.js', 'geraSlug.js'));
 		
 		if ($id) {
 			$this->categorias->id = $id;
@@ -98,8 +105,8 @@ class categoriasController extends controller {
 	
 	public function cadastrar() {
 		$this->_view->titulo = "Categorias > Cadastrar";
-		$this->_view->script = html::script(array('toolTip.js'));
-	
+		$this->_view->script = html::script(array('toolTip.js', 'geraSlug.js'));
+		
 		$this->loadModel('status');
 		$this->_view->todosStatus = $this->status->procura('todos');
 		

@@ -4,6 +4,28 @@
 	<a href="<?php echo BASE_URL.'categorias/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
 
+<form method="post">
+	<div class="box">
+		<h2>Buscar categorias:</h2>
+		<p class="fl input margin5">
+			<label>Nome:</label>
+			<input type="text" name="buscar_nom"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Descrição:</label>
+			<input type="text" name="buscar_des"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Slug:
+				<?php $mensagemSlug = "<strong>Slug</strong></br>Palavras chave para categorias. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria e seus produtos. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
+				<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
+			</label>
+			<input type="text" class="rg campoSlug" name="buscar_slug" onkeyup="geraSlug(this.value)"/>
+		</p>
+		<input class="botao fr" name="buscar" type="submit" value="Buscar"/>
+	</div>
+</form>
+
 <?php if(count($this->res) != 0) { ?>
 <form method="post" action="<?php echo BASE_URL.'categorias/excluir'; ?>">
 	<div class="box">
@@ -13,7 +35,7 @@
 					<th class="tal"></th>
 					<th class="tal">Código</th>
 					<th class="tal">Nome</th>
-					<th class="tal">Url</th>
+					<th class="tal">Slug</th>
 					<th class="tal">Visualizar</th>
 					<th class="tal">Alterar</th>
 				</tr>

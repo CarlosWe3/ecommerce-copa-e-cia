@@ -10,11 +10,28 @@ class categoriasModel extends model {
 	public $url_slug;
 	public $cod_status;
 	
+	public $buscar_nom;
+	public $buscar_des;
+	public $buscar_slug;
+	
 	public function __construct() {
 		parent::__construct();
 	}
 		
 	public function getListagem() {
+		$busca = '';
+		if($this->buscar_nom) {
+			$busca .= " AND C.nom_categoria LIKE '%".$this->buscar_nom."%' ";
+		}
+		
+		if($this->buscar_des) {
+			$busca .= " AND C.des_categoria LIKE '%".$this->buscar_des."%' ";
+		}
+		
+		if($this->buscar_slug) {
+			$busca .= " AND C.url_slug LIKE '%".$this->buscar_slug."%' ";
+		}
+		
 		$sql = "SELECT C.cod_categoria,
 					   C.nom_categoria, 
 		               C.des_categoria, 
@@ -24,6 +41,7 @@ class categoriasModel extends model {
 		        FROM ".$this->tabela." as C, 
 	                   cec_status as S
 		        WHERE C.cod_status = S.cod_status
+		  		".$busca."     
 		        ORDER BY C.cod_categoria DESC";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
@@ -97,40 +115,4 @@ class categoriasModel extends model {
 		$valores = array($this->nom_categoria, $this->des_categoria, $this->txt_categoria, $this->url_slug, $this->cod_status, $this->cod_categoria);
 		$prep->execute($valores);
 	}
-	 
-	 /*
-	function cadastrar() {
-		$sql = "insert into ".$this->tabela." 
-				(nom_cliente, des_email, des_senha, dat_cadastro, cod_status) 
-				values ('".$this->nom_cliente."',
-						'".$this->des_email."',
-						'".$this->des_senha."',
-						'".$this->dat_cadastro."',
-						'".$this->cod_status."')";
-		$prep = $this->conn->prepare($sql);
-		$prep->execute();
-	}
-	
-	
-	
-	function alterar() {
-		$sql = "UPDATE ".$this->tabela." 
-				SET nom_cliente   = ?
-				   ,des_email     = ? 
-				   ,cod_status    = ?
-				WHERE cod_cliente = ? ";
-		$prep = $this->conn->prepare($sql);
-		$valores = array($this->nom_cliente, $this->des_email, $this->cod_status, $this->cod_cliente);
-		$prep->execute($valores);
-		
-		if($this->des_senha) {
-	   		$sql = "UPDATE ".$this->tabela." 
-	   				SET des_senha     = ?
-				    WHERE cod_cliente = ? ";
-			$prep = $this->conn->prepare($sql);
-			$valores = array($this->des_senha, $this->cod_cliente);
-			$prep->execute($valores);
-		}
-	}
-	*/
 }

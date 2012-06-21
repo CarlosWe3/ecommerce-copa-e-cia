@@ -1,0 +1,35 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<form method="post">
+	<div class="box">
+		<p class="input required">
+			<label>Nome Loja:</label>
+			<input type="text" name="nom_loja" maxlength="150" class="input_min" value="<?php echo isset($this->configuracoes->nom_loja) ? $this->configuracoes->nom_loja : null ?>" />
+		</p>
+		<p class="input required">
+			<label>Email Principal:</label>
+			<input type="text" name="email_principal" maxlength="150" class="input_min dat" value="<?php echo isset($this->configuracoes->des_email_principal) ? $this->configuracoes->des_email_principal : null ?>" />
+		</p>
+		<p class="input required">
+			<label>Descrição:
+				<?php $mensagemSlug = "<strong>Descrição</strong></br>Uma breve descrição sobre a Copa&Cia irá ajudar os buscadores, como o Google por exemplo, a encontrar o site."; ?>
+				<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>	
+			</label>
+			<input type="text" name="des_site" maxlength="80" class="input_min dat" value="<?php echo isset($this->configuracoes->des_descricao_seo) ? $this->configuracoes->des_descricao_seo : null ?>" />
+		</p>
+		<p class="input required">
+			<label>Meta Tags:
+				<?php $mensagemSlug = "<strong>Meta Tags</strong></br>Defina palavras chave sobre a Copa&Cia. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar o site.</br>Palavras separadas por vírgula (,) e espaço, minúsculas, sem acentos ou caractéres especias"; ?>
+				<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
+			</label>
+			<input type="text" name="meta_tags" maxlength="250" class="alpha input_min tel campoTag" value="<?php echo isset($this->configuracoes->des_metatag_seo) ? $this->configuracoes->des_metatag_seo : null ?>" />
+		</p>
+	</div>
+	<div class="box">
+		<input class="botao fr" name="atualizar" type="submit" value="Atualizar"/>
+	</div>
+</form>
+<?php 
+	//destroi sessão de mensagens para quando refresh não continuar exibindo mensagens
+	unset($_SESSION['_msg']);
+?>

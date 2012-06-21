@@ -24,11 +24,11 @@ class clientesModel extends model {
 	public function getListagem() {
 		$busca = '';
 		if($this->buscar_nom) {
-			$busca .= " AND C.nom_cliente = '".$this->buscar_nom."' ";
+			$busca .= " AND C.nom_cliente LIKE '%".$this->buscar_nom."%' ";
 		}
 		
 		if($this->buscar_email) {
-			$busca .= " AND C.des_email = '".$this->buscar_email."' ";
+			$busca .= " AND C.des_email LIKE '%".$this->buscar_email."%' ";
 		}
 		
 		if($this->buscar_rg) {

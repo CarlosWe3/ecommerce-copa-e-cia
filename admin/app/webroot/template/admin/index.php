@@ -42,7 +42,7 @@
 				<li><a href="#">Pedidos</a></li>
 				<li><a href="#">Sistema ⇣</a>
 					<ul>
-						<li><a href="#">Configurações</a></li>
+						<li><a href="<?php echo BASE_URL.'configuracoes'; ?>">Configurações</a></li>
 						<li><a href="#">Taxas</a></li>
 						<li><a href="#">Tags</a></li>
 					</ul>	

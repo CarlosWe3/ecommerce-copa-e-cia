@@ -6,7 +6,7 @@
  * 
  */
 function geraSlug(value){
-	minusculo = value.toLowerCase(); //transforma tudo em letras minusculas
-	string = semLetra.replace(/\W/g, "-"); //substitui caracteres especias e espaços por line
-	$('.campoSlug').val(string);
+	string = value.replace(/\W/g, "-"); //substitui caracteres especias e espaços por line
+	minusculo = string.toLowerCase(); //transforma tudo em letras minusculas
+	$('.campoSlug').val(minusculo);
 }
