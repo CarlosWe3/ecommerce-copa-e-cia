@@ -115,4 +115,16 @@ class categoriasModel extends model {
 		$valores = array($this->nom_categoria, $this->des_categoria, $this->txt_categoria, $this->url_slug, $this->cod_status, $this->cod_categoria);
 		$prep->execute($valores);
 	}
+	
+	function ativas(){
+		$sql = 'SELECT cod_categoria, 
+		               nom_categoria
+		        FROM '.$this->tabela.' as C,
+		        	 cec_status as S
+		        WHERE S.COD_STATUS = 1 
+		        AND C.COD_STATUS = S.COD_STATUS ';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+		return $prep->fetchAll();
+	}
 }

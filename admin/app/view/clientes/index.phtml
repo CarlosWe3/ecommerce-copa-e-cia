@@ -43,8 +43,8 @@
 					<th class="tal">E-mail</th>
 					<th class="tac">Telefones</th>
 					<th class="tal">Tipo</th>
-					<th class="tal">Visualizar</th>
-					<th class="tal">Alterar</th>
+					<th class="tac">Visualizar</th>
+					<th class="tac">Alterar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,10 +56,10 @@
 					<td class="tal"><?php echo $ln['des_email']?></td>
 					<td class="tac"><?php echo $ln['num_telefone_fixo'].'<br/>'.$ln['num_telefone_celular']; ?></td>
 					<td class="tal"><?php echo $ln['des_cliente_tipo']; ?></td>
-					<td class="tal width5">
+					<td class="tac width5">
 						<a href="<?php echo BASE_URL.'clientes/visualizar/'.$ln['cod_cliente']; ?>" class="botao fl">Visualizar</a>
 					</td>
-					<td class="tal width5">
+					<td class="tac width5">
 						<a href="<?php echo BASE_URL.'clientes/alterar/'.$ln['cod_cliente']; ?>" class="botao fl amarelo">Alterar</a>
 					</td>
 				</tr>			

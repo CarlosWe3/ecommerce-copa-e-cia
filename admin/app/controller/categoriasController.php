@@ -20,6 +20,7 @@ class categoriasController extends controller {
 	
 	public function visualizar($id = false) {
 		$this->_view->titulo = "Categorias > Visualizar";
+		$this->_view->script = html::script(array('toolTip.js'));
 		
 		if ($id) {
 			 $this->categorias->id = $id;
@@ -53,7 +54,7 @@ class categoriasController extends controller {
 			$this->categorias->excluirArray($arrayCheck);
 				
 			session::setSession('_tipMsg', '');
-			session::setSession("_msg", 'Categorias excluidas com sucesso!');
+			session::setSession("_msg", 'Categoria(s) excluidas(s) com sucesso!');
 			header("Location: ".BASE_URL."categorias");
 		}
 		

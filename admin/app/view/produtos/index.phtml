@@ -1,12 +1,13 @@
 <h2><?php echo $this->titulo; ?></h2>
 
 <div class="box">
-	<a href="<?php echo BASE_URL.'categorias/cadastrar'; ?>" class="botao fr">Cadastrar</a>
+	<a href="<?php echo BASE_URL.'produtos/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
 
+<!--
 <form method="post">
 	<div class="box">
-		<h2>Buscar categorias:</h2>
+		<h2>Buscar produtos:</h2>
 		<p class="fl input margin5">
 			<label>Nome:</label>
 			<input type="text" name="buscar_nom"/>
@@ -25,9 +26,9 @@
 		<input class="botao fr" name="buscar" type="submit" value="Buscar"/>
 	</div>
 </form>
-
+-->
 <?php if(count($this->res) != 0) { ?>
-<form method="post" action="<?php echo BASE_URL.'categorias/excluir'; ?>">
+<form method="post" action="<?php echo BASE_URL.'produtos/excluir'; ?>">
 	<div class="box">
 		<table>
 			<thead>
@@ -35,10 +36,9 @@
 					<th class="tal"></th>
 					<th class="tal">Código</th>
 					<th class="tal">Nome</th>
-					<th class="tal">Slug
-						<?php $mensagemSlug = "<strong>Slug</strong></br>Palavras chave para categorias. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria e seus produtos. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
-						<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
-					</th>
+					<th class="tal">Numero</th>
+					<th class="tal">Valor (R$)</th>
+					<th class="tal">Status</th>
 					<th class="tac">Visualizar</th>
 					<th class="tac">Alterar</th>
 				</tr>
@@ -46,15 +46,17 @@
 			<tbody>
 			<?php foreach($this->res as $ln) { ?>
 				<tr>
-					<td class="tal width5"><input value="<?php echo $ln['cod_categoria']; ?>" name="check[]" type="checkbox"/></td>
-					<td class="tal"><?php echo '#'.$ln['cod_categoria']?></td>
-					<td class="tal"><?php echo $ln['nom_categoria']?></td>
-					<td class="tal"><?php echo $ln['url_slug']?></td>
+					<td class="tal width5"><input value="<?php echo $ln['cod_produto']; ?>" name="check[]" type="checkbox"/></td>
+					<td class="tal"><?php echo '#'.$ln['cod_produto']?></td>
+					<td class="tal"><?php echo $ln['nom_produto']?></td>
+					<td class="tal"><?php echo $ln['num_produto']?></td>
+					<td class="tal"><?php echo $ln['vlr_preco']?></td>
+					<td class="tal"><?php echo $ln['nom_status']?></td>
 					<td class="tac width5">
-						<a href="<?php echo BASE_URL.'categorias/visualizar/'.$ln['cod_categoria']; ?>" class="botao fl">Visualizar</a>
+						<a href="<?php echo BASE_URL.'produtos/visualizar/'.$ln['cod_produto']; ?>" class="botao fl">Visualizar</a>
 					</td>
 					<td class="tac width5">
-						<a href="<?php echo BASE_URL.'categorias/alterar/'.$ln['cod_categoria']; ?>" class="botao fl amarelo">Alterar</a>
+						<a href="<?php echo BASE_URL.'produtos/alterar/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Alterar</a>
 					</td>
 				</tr>			
 			<?php } ?>

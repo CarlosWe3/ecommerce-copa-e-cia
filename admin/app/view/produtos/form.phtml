@@ -1,0 +1,77 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'produtos'; ?>" class="botao fl">Voltar</a>
+</div>
+<form method="post">
+	<div class="box">
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Produtos</a></li>
+				<li><a href="#tabs-2">Imagens</a></li>
+				<li><a href="#tabs-3">Dimensões</a></li>
+			</ul>
+			
+			<div id="tabs-1">
+				<p class="input required">
+				<label>Nome:</label>
+				<input type="text" name="nom_produto" maxlength="255" class="input_min" onkeyup="geraSlug(this.value)" value="<?php echo isset($this->produtos->nom_produto) ? $this->produtos->nom_produto : null ?>"/>
+				</p>
+				<p class="input">
+					<label>Número:</label>
+					<input type="text" name="num_produto" maxlength="150" class="input_min" value="<?php echo isset($this->produtos->num_produto) ? $this->produtos->num_produto : null ?>"/>
+				</p>
+				<p class="input">
+					<label>Alerta do Estoque:</label>
+					<input type="text" name="num_alerta" maxlength="11" class="input_min" value="<?php echo isset($this->produtos->num_estoque_alerta) ? $this->produtos->num_estoque_alerta : null ?>"/>
+				</p>
+				<p class="input required">
+					<label>Valor (R$):</label>
+					<input type="text" name="num_valor" maxlength="11" class="input_min" value="<?php echo isset($this->produtos->vlr_preco) ? $this->produtos->vlr_preco : null ?>"/>
+				</p>
+				<p class="input">
+					<label>Descrição:</label>
+					<textarea name="des_desc"><?php echo isset($this->produtos->des_descricao) ? $this->produtos->des_descricao : null ?></textarea>
+				</p>
+				<p class="input">
+					<label>Informação:</label>
+					<textarea name="des_info"><?php echo isset($this->produtos->des_informacao) ? $this->produtos->des_informacao : null ?></textarea>
+				</p>
+				<p class="input required">
+					<label>Slug:
+						<?php $mensagemSlug = "<strong>Slug</strong></br>Defina palavras chave para este produto. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas ao produto. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
+						<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
+					</label>
+					<input type="text" name="url_slug" maxlength="255" class="input_min campoSlug" onkeyup="geraSlug(this.value)" value="<?php echo isset($this->produtos->url_slug) ? $this->produtos->url_slug : null ?>"/>
+				</p>
+				<p class="input">
+					<label>Status:</label>
+					<select name="ind_status">
+					<?php foreach($this->todosStatus as $status) { ?> 
+						<option value="<?php echo $status['cod_status']; ?>" <?php echo isset($this->produtos->cod_status) ? $status['cod_status'] == $this->produtos->cod_status ? 'selected="selected"' : '' : null ?>><?php echo $status['nom_status']; ?></option>
+					<?php } ?>
+					</select>
+				</p>
+				<p class="input">
+					<label>Categorias:</label>
+					<?php foreach($this->todasCategorias as $categorias) { ?> 
+						<div class="checkbox">
+							<input type="checkbox" name="categorias[]" <?php echo isset($this->categorias->cod_categoria) ? $categorias['cod_categoria'] == $this->categorias->cod_categoria ? 'checked="checked"' : '' : null ?>/><?php echo $categorias['nom_categoria']; ?></br>
+						</div>
+					<?php } ?>		
+				</p>		
+			</div>
+			
+			<div id="tabs-2">
+				div 2
+			</div>
+			<div id="tabs-3">
+				div 3
+			</div>
+		</div>	
+	</div>
+	
+	<div class="box">
+		<input class="botao fr" name="cadastrar" type="submit" value="Cadastrar"/>
+	</div>
+</form>

@@ -1,0 +1,23 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'produtos'; ?>" class="botao fl">Voltar</a>
+</div>
+
+<form method="post">
+	<div class="box">
+		<p class="error">
+			Você irá excluir <?php echo count($this->selecionado); ?> produto(s) definitivamente:</br>
+			<?php 
+				foreach($this->selecionado as $ln) {
+					echo '#'.$ln['cod_produto'].' - '.$ln['nom_produto'].'<br/>';
+				}
+			?>
+		</p>
+	</div>
+	<div class="box">
+		<input type="hidden" name="check" value="<?php echo $this->check; ?>"/>
+		<input class="botao fr vermelho" name="confirma" type="submit" value="Excluir"/>
+		<a href="<?php echo BASE_URL.'categorias'; ?>" class="botao fl amarelo">Cancelar</a>
+	</div>
+</form>

@@ -296,6 +296,7 @@ p.error em {
 	color: #fff;
 }
 
+/* para não diferir cor de botoes normals e botoes em links */
 a:visited { color: #fff; }
 
 /* Posicionamento */
@@ -334,4 +335,10 @@ a:visited { color: #fff; }
 /* paginação */
 .select_pg {
 	border: 2px solid #437bc5;
+}
+
+/* alinha checkbox e seus nomes */
+.checkbox {
+	margin: 0;
+	padding: 0;
 }

@@ -15,6 +15,7 @@
 		<title>Administração - <?php echo isset($this->_titulo) ? $this->_titulo : '' ?></title>
 		<meta name="author" content="WE3 Online" />
 		<?php  
+			echo isset($this->css) ? $this->css : NULL;
 			echo html::css(array('reset.css','style.css','layout.css','menu.css','padrao.css'));
 			echo html::script('modernizr.js');
 		?>
@@ -33,7 +34,7 @@
 				<li class="current"><a href="#">Home</a></li>
 				<li><a href="#">Catálogo ⇣</a>
 					<ul>
-						<li><a href="#">Produtos</a></li>
+						<li><a href="<?php echo BASE_URL.'produtos'; ?>">Produtos</a></li>
 						<li><a href="<?php echo BASE_URL.'categorias'; ?>">Categorias</a></li>
 						<li><a href="#">Tags</a></li>
 					</ul>					
@@ -75,7 +76,7 @@
 			
 		<!-- scripts concatenated and minified via build script -->
 		<?php
-			echo html::script(array("plugins.js","script.js"));
+			echo html::script(array("plugins.js", "script.js"));
 			echo isset($this->script) ? $this->script : NULL;
 		?>		
 	</body>

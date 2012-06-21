@@ -1,0 +1,43 @@
+<h2><?php echo $this->titulo; ?></h2>
+
+<div class="box">
+	<a href="<?php echo BASE_URL.'produtos'; ?>" class="botao fl">Voltar</a>
+</div>
+
+<div class="box">
+	<p class="input">
+		<label>Nome:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->produtos->nom_produto) ? $this->produtos->nom_produto : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Numero:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->produtos->num_produto) ? $this->produtos->num_produto : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Alerta do Estoque:</label>
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->produtos->num_estoque_alerta) ? $this->produtos->num_estoque_alerta : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Valor (R$):</label>
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->produtos->vlr_preco) ? $this->produtos->vlr_preco : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Descrição:</label>
+		<textarea name="" class="width500 " disabled="disabled"><?php echo isset($this->produtos->des_descricao) ? $this->produtos->des_descricao : null ?></textarea>
+	</p>
+	<p class="input">
+		<label>Informação:</label>
+		<textarea name="" class="width500" disabled="disabled"><?php echo isset($this->produtos->des_informacao) ? $this->produtos->des_informacao : null ?></textarea>
+	</p>
+	<p class="input">
+		<label>Slug:
+			<?php $mensagemSlug = "<strong>Slug</strong></br>Palavras chave para categorias. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria e seus produtos. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
+			<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>	
+		</label>
+		<input type="text" disabled="disabled" class="input_min width500 tel" value="<?php echo isset($this->produtos->url_slug) ? $this->produtos->url_slug : null ?>"/>
+	</p>
+	<p class="input">
+		<label>Status:</label>
+		<input type="text" disabled="disabled" class="input_min width500" value="<?php echo isset($this->status->nom_status) ? $this->status->nom_status : null ?>"/>
+	</p>
+</div>
