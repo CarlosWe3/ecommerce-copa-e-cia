@@ -1,4 +1,8 @@
 <?php
+/**
+ * Classe controller de clientes de produtos
+ * @author Guilherme Lessa 22/06/12 - 13:20
+ */
 class clientesController extends controller {
 	public function __construct() {
 		parent::__construct();
@@ -6,8 +10,16 @@ class clientesController extends controller {
 		$this->loaderLib('data');
 	}
 	
+   /**
+    * Método iniciado automaticamente no controller
+    * @author Guilherme Lessa 22/06/12 - 13:20
+    */
 	public function index() {
 		if(isset($_POST['buscar'])) {
+		/*
+		 * se foi executado uma busca de clientes, 
+		 * então seta váriaveis de busca, filtrando resultados do getListagem()
+		 */
 			$this->clientes->buscar_nom   = $_POST['buscar_nome'];
 			$this->clientes->buscar_email = $_POST['buscar_email'];
 			$this->clientes->buscar_rg    = $_POST['buscar_rg'];
@@ -20,6 +32,10 @@ class clientesController extends controller {
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'check.js'));
 	}
 	
+	/**
+    * Método que cadastra novos clientes categorias
+    * @author Guilherme Lessa 22/06/12 - 13:30
+    */
 	public function cadastrar() {
 		$this->_view->titulo = "Clientes > Cadastrar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'verifica_pj.js', 'input_int.js', 'geraCidades.js'));
@@ -34,6 +50,7 @@ class clientesController extends controller {
 		$this->loadModel('status');
 		$this->_view->todosStatus = $this->status->procura('todos');
 		
+		//quando submeter o formulário de cadastro
 		if (isset($_POST['cadastrar'])) {
 			$nom 			 = $_POST['nom'];
 			$dat_nascimento  = data::dataMysql($_POST['dat_nascimento']);
@@ -62,13 +79,15 @@ class clientesController extends controller {
 			$num_cep 		 = (int)str_replace('-', '', $_POST['num_cep']);
 			$cod_cidade 	 = $_POST['cod_cidade'];
 			$cod_estado 	 = $_POST['cod_estado'];
-		
+			
+			// função que verifica se os campos obrigatórios (array de campos) foram preenchido
 			$campos = array($nom,$dat_nascimento,$num_tel,$_POST['des_senha'],$num_rg,$num_cpf,$des_endereco,$num_endereco,$nom_bairro,$num_cep);
 		    $diferenteZero = model::diferenteZero($campos); //verifica se todos os campos do array contem valor
-							
-			if($_POST['des_senha']) { //so verifica tamanho da senha se houver senha
+			
+			// função que verifica se a senha esta no escopo de tamanho correto	
+			if($_POST['des_senha']) {
 				$tamSenha = model::tam_string($_POST['des_senha'], 6, 20); //verifica tamanho da senha de min 6 e max 20
-			} else { //então se não houver senha, ela automaticamente é true
+			} else {
 				$tamSenha = true;
 			}
 
@@ -78,15 +97,19 @@ class clientesController extends controller {
 			} else if($tamSenha == false) { //erro de tamanho de senha
 				$this->_view->_msg 	   = 'O tamanho da senha deve estar entre 6 e 20 caractéres.'; 
 				$this->_view->_tipoMsg = 'erro';
-			} else {	
+			} else {
+				//seta as variáveis básicas de cliente 		
 				$this->clientes->nom_cliente  = $nom;
 				$this->clientes->des_email    = $des_email;
 				$this->clientes->des_senha    = $des_senha;
 				$this->clientes->dat_cadastro = time();
 				$this->clientes->cod_status   = $ind_status;
 				$this->clientes->cadastrar();
+				
+				//captura ultimo id inserido
 				$this->clientes->ultimo_id    = $this->clientes->conn->lastInsertId();
 				
+				//seta as variáveis básicas de informações dos clientes 	
 				$this->loadModel('clienteInformacoes');
 				$this->clienteInformacoes->num_rg 				= $num_rg;
 				$this->clienteInformacoes->num_cpf 				= $num_cpf;
@@ -101,6 +124,7 @@ class clientesController extends controller {
 				$this->clienteInformacoes->cod_cliente			= $this->clientes->ultimo_id;
 				$this->clienteInformacoes->cadastrar();
 				
+				//seta as variáveis básicas de endereços dos clientes 
 				$this->loadModel('clienteEnderecos');	
 				$this->clienteEnderecos->des_endereco 	 = $des_endereco;
 				$this->clienteEnderecos->num_endereco 	 = $num_endereco;
@@ -120,6 +144,11 @@ class clientesController extends controller {
 		$this->_view->renderView('form');
 	}	
 	
+   /**
+	* Método que exibe o cliente clicado
+    * @param int $id - chave primaria do cliente capturada na url, seta o cliente a exibir
+	* @author Guilherme Lessa 22/06/12 - 13:40
+	*/
 	public function visualizar($id = false) {
 		$this->_view->titulo = "Clientes > Visualizar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js'));
@@ -161,6 +190,11 @@ class clientesController extends controller {
 		}
 	}
 	
+   /**
+    * Método que altera o cliente clicado
+    * @param int $id - chave primaria do cliente capturado na url
+    * @author Guilherme Lessa 22/06/12 - 13:40
+    */
 	public function alterar($id = false) {
 		$this->_view->titulo = "Clientes > Alterar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'verifica_pj.js', 'input_int.js', 'geraCidades.js'));
@@ -194,6 +228,7 @@ class clientesController extends controller {
 			$this->loadModel('estados');
 			$this->_view->todosEstados = $this->estados->procura('todos');
 			
+			//quando submeter o formulário de alterar
 			if(isset($_POST['cadastrar'])) {
 				$nom 			 = $_POST['nom'];
 				$dat_nascimento  = data::dataMysql($_POST['dat_nascimento']);
@@ -208,6 +243,7 @@ class clientesController extends controller {
 				$num_cpf 		 = $_POST['num_cpf'];
 				$ind_genero  	 = $_POST['ind_genero'];
 				$num_cnpj 		 = $_POST['num_cnpj'];
+				
 				//caso nao preencha cnpj, sempre será pessoa fisica (tipo = 1)
 				if(!$_POST['num_cnpj']) {
 					$ind_tipo = 1;
@@ -223,12 +259,14 @@ class clientesController extends controller {
 				$cod_cidade 	 = $_POST['cod_cidade'];
 				$cod_estado 	 = $_POST['cod_estado'];
 				
+				// função que verifica se os campos obrigatórios (array de campos) foram preenchido
 				$campos = array($nom,$dat_nascimento,$num_tel,$num_rg,$num_cpf,$des_endereco,$num_endereco,$nom_bairro,$num_cep);
 			    $diferenteZero = model::diferenteZero($campos); //verifica se todos os campos do array contem valor
-								
-				if($_POST['des_senha']) {//so verifica tamanho da senha se houver senha
+				
+				// função que verifica se a senha esta no escopo de tamanho correto					
+				if($_POST['des_senha']) {
 					$tamSenha = model::tam_string($_POST['des_senha'], 6, 20); //verifica tamanho da senha de min 6 e max 20
-				} else {//então se não houver senha, ela automaticamente é true
+				} else {
 					$tamSenha = true;
 				}
 
@@ -239,6 +277,7 @@ class clientesController extends controller {
 					$this->_view->_msg 	   = 'O tamanho da senha deve estar entre 6 e 20 caractéres.'; 
 					$this->_view->_tipoMsg = 'erro';
 				} else {
+					//seta as variáveis básicas de cliente 	
 					$this->clientes->cod_cliente = $id;
 					$this->clientes->nom_cliente = $nom;
 					$this->clientes->des_email   = $des_email;
@@ -246,6 +285,7 @@ class clientesController extends controller {
 					$this->clientes->cod_status  = $ind_status;
 					$this->clientes->alterar();
 					
+					//seta as variáveis de informações do cliente 	
 					$this->clienteInformacoes->num_rg 				= $num_rg;
 					$this->clienteInformacoes->num_cpf 				= $num_cpf;
 					$this->clienteInformacoes->num_cnpj   			= $num_cnpj;
@@ -259,6 +299,7 @@ class clientesController extends controller {
 					$this->clienteInformacoes->cod_cliente			= $id;
 					$this->clienteInformacoes->alterar();
 					
+					//seta as variáveis de endereõ do cliente 	
 					$this->clienteEnderecos->cod_cliente 	 = $id;
 					$this->clienteEnderecos->des_endereco 	 = $des_endereco;
 					$this->clienteEnderecos->num_endereco 	 = $num_endereco;
@@ -278,7 +319,13 @@ class clientesController extends controller {
 		$this->_view->renderView('form');
 	}
 	
-	public function excluir() {	
+	
+   /**
+    * Método exclui clientes atraves dos checkbox
+    * @author Guilherme Lessa 22/06/12 - 13:50
+    */
+	public function excluir() {
+		//array montado com os checkbox
 		$this->_view->selecionado = $this->clientes->selectArray($_POST['check']);
 		$this->_view->titulo = "Clientes > Excluir";
 		
@@ -297,11 +344,14 @@ class clientesController extends controller {
 			
 			$this->loadModel('clienteEnderecos');
 			$this->clienteEnderecos->excluirArray($arrayCheck);
+			//array montado com os checkbox
 			
 			$this->loadModel('clienteInformacoes');
 			$this->clienteInformacoes->excluirArray($arrayCheck);
+			//array montado com os checkbox
 			
 			$this->clientes->excluirArray($arrayCheck);
+			//array montado com os checkbox
 				
 			session::setSession('_tipMsg', '');
 			session::setSession("_msg", 'Clientes excluidos com sucesso!');

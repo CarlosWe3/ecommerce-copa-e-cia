@@ -1,8 +1,10 @@
 <?php
+/**
+ * Classe model de estados
+ * @author Guilherme Lessa 22/06/12 - 14:00
+ */
 class estadosModel extends model {
-	
 	public $tabela = "cec_estados";
-	
 	public $cod_estado;
 	public $nom_estado;
 	public $sig_estado;
@@ -11,6 +13,11 @@ class estadosModel extends model {
 		parent::__construct();
 	}
 	
+   /**
+	* Método que seta o estado selecionado por id
+    * @param int $this->id - chave primaria do estado
+	* @author Guilherme Lessa 22/06/12 - 14:05
+	*/
 	function _set() {
 		$res = $this->procura('unico');
 		

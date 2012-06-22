@@ -1,8 +1,6 @@
 <?php
 class categoriasModel extends model {
-	
 	public $tabela = "cec_categorias";
-	
 	public $cod_categoria;
 	public $nom_categoria;
 	public $des_categoria;
@@ -17,8 +15,15 @@ class categoriasModel extends model {
 	public function __construct() {
 		parent::__construct();
 	}
-		
+
+	/**
+	 * Descrição do método
+	 * @author Nome do criador da varialvel
+	 * @param tipo $variavel - descrição 
+	 * @return O que irá retornar (Quando houver retorno)
+	 */
 	public function getListagem() {
+		// Inicio da busca
 		$busca = '';
 		if($this->buscar_nom) {
 			$busca .= " AND C.nom_categoria LIKE '%".$this->buscar_nom."%' ";
@@ -74,6 +79,11 @@ class categoriasModel extends model {
 		$prep->execute();
 	}
 	
+	/**
+	 * @author Guilherme 
+	 * Método para buscar as categorias conforme o array.
+	 * @param array $array - Traz um array com códigos para usar na busca
+	 */
 	function selectArray($array) {
 		$cod = '';
 		foreach($array as $ln) {
@@ -90,6 +100,11 @@ class categoriasModel extends model {
 		return $prep->fetchAll();
 	}
 	
+   /**
+	* Método que exclui as categorias do array de codigo das categorias
+    * @param int $array - chave primaria das categorias
+	* @author Guilherme Lessa 22/06/12 - 14:40
+	*/
 	function excluirArray($array) {
 		$cod = '';
 		foreach($array as $ln) {
@@ -103,6 +118,10 @@ class categoriasModel extends model {
 		$prep->execute();
 	}
 	
+   /**
+	* Método que altera as categorias de acordo com id
+	* @author Guilherme Lessa 22/06/12 - 14:45
+	*/
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela." 
 				SET nom_categoria = ?
@@ -116,6 +135,10 @@ class categoriasModel extends model {
 		$prep->execute($valores);
 	}
 	
+   /**
+	* Método que exibe as categorias ativas
+	* @author Guilherme Lessa 22/06/12 - 14:45
+	*/
 	function ativas(){
 		$sql = 'SELECT cod_categoria, 
 		               nom_categoria

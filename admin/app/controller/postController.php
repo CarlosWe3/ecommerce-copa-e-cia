@@ -13,8 +13,4 @@ class postController extends controller {
 		$res = $this->status->procura('todos');
 		$this->_view->consulta = $res;
 	}
-	
-	
-	
-	
 }

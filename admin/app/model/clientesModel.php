@@ -1,8 +1,10 @@
 <?php
+/**
+ * Classe model de clientes
+ * @author Guilherme Lessa 22/06/12 - 14:20
+ */
 class clientesModel extends model {
-	
 	public $tabela = "cec_clientes";
-	
 	public $cod_cliente;
 	public $nom_cliente;
 	public $des_email;
@@ -11,6 +13,7 @@ class clientesModel extends model {
 	public $cod_status;
 	public $ultimo_id; 	
 	
+	//variaveis filtros subemtidas pelo formulário de busca
 	public $buscar_nom;
 	public $buscar_email;
 	public $buscar_rg;
@@ -22,6 +25,8 @@ class clientesModel extends model {
 	}
 		
 	public function getListagem() {
+		
+		//se houver alguma busca, filtro no sql
 		$busca = '';
 		if($this->buscar_nom) {
 			$busca .= " AND C.nom_cliente LIKE '%".$this->buscar_nom."%' ";
@@ -64,6 +69,10 @@ class clientesModel extends model {
 		return $prep->fetchAll();
 	}
 	
+   /**
+	* Método que seta o cliente selecionado
+	* @author Guilherme Lessa 22/06/12 - 14:20
+	*/
 	function _set() {
 		$res = $this->procura('unico');
 		
@@ -76,7 +85,11 @@ class clientesModel extends model {
 			$this->cod_status   = $res['cod_status'];
 		}
 	}
-		
+	
+   /**
+	* Método que cadastra novo cliente
+	* @author Guilherme Lessa 22/06/12 - 14:20
+	*/	
 	function cadastrar() {
 		$sql = "insert into ".$this->tabela." 
 				(nom_cliente, des_email, des_senha, dat_cadastro, cod_status) 
@@ -89,6 +102,11 @@ class clientesModel extends model {
 		$prep->execute();
 	}
 	
+   /**
+	* Método que seleciona todos os clientes do array
+    * @param array $array - array de cod_cliente a excluir
+	* @author Guilherme Lessa 22/06/12 - 14:20
+	*/	
 	function selectArray($array) {
 		$cod = '';
 		foreach($array as $ln) {
@@ -105,6 +123,10 @@ class clientesModel extends model {
 		return $prep->fetchAll();
 	}
 	
+   /**
+	* Método que altera o cliente
+	* @author Guilherme Lessa 22/06/12 - 14:20
+	*/	
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela." 
 				SET nom_cliente   = ?
@@ -125,6 +147,11 @@ class clientesModel extends model {
 		}
 	}
 	
+  /**
+	* Método que altera o cliente
+	* @param array $array - array de cod_cliente a excluir
+	* @author Guilherme Lessa 22/06/12 - 14:20
+	*/	
 	function excluirArray($array) {
 		$cod = '';
 		foreach($array as $ln) {

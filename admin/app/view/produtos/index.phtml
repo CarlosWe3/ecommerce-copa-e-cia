@@ -4,7 +4,6 @@
 	<a href="<?php echo BASE_URL.'produtos/cadastrar'; ?>" class="botao fr">Cadastrar</a>
 </div>
 
-<!--
 <form method="post">
 	<div class="box">
 		<h2>Buscar produtos:</h2>
@@ -13,8 +12,20 @@
 			<input type="text" name="buscar_nom"/>
 		</p>
 		<p class="fl input margin5">
+			<label>Valor:</label>
+			<input type="text" name="buscar_nom"/>
+		</p>
+		<p class="fl input margin5">
 			<label>Descrição:</label>
-			<input type="text" name="buscar_des"/>
+			<input type="text" name="buscar_nom"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Início da Promoção:</label>
+			<input type="text" name="buscar_nom"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Final da Promoção:</label>
+			<input type="text" name="buscar_nom"/>
 		</p>
 		<p class="fl input margin5">
 			<label>Slug:
@@ -26,7 +37,7 @@
 		<input class="botao fr" name="buscar" type="submit" value="Buscar"/>
 	</div>
 </form>
--->
+
 <?php if(count($this->res) != 0) { ?>
 <form method="post" action="<?php echo BASE_URL.'produtos/excluir'; ?>">
 	<div class="box">
@@ -41,6 +52,7 @@
 					<th class="tal">Status</th>
 					<th class="tac">Visualizar</th>
 					<th class="tac">Alterar</th>
+					<th class="tac">Nova Promoção</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -57,6 +69,9 @@
 					</td>
 					<td class="tac width5">
 						<a href="<?php echo BASE_URL.'produtos/alterar/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Alterar</a>
+					</td>
+					<td class="tac width5">
+						<a href="<?php echo BASE_URL.'produtos/promcao/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Promover</a>
 					</td>
 				</tr>			
 			<?php } ?>

@@ -22,6 +22,7 @@ defined('APP_PATH') 	? null : define('APP_PATH', SITE_ROOT . 'app' . DS);
 defined('CONFIG_PATH')  ? null : define('CONFIG_PATH', SITE_ROOT . 'vendor' . DS . 'config' . DS);
 defined('SYS_PATH') 	? null : define('SYS_PATH', SITE_ROOT . 'vendor' . DS . 'system' . DS);
 defined('MEDIA_PATH') 	? null : define('MEDIA_PATH', str_replace('admin'.DS, '', SITE_ROOT) . 'media' . DS);
+
 // Alterar o BASE_URL quando iniciar o projeto
 defined('BASE_URL') 	? null : define('BASE_URL', 'http://server01:8082/copa_cia_ecommerce/www/admin/');
 

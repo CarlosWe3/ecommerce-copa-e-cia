@@ -14,9 +14,8 @@ class produtosController extends controller {
 		
 	public function cadastrar() {
 		$this->_view->titulo = "Produtos > Cadastrar";
-		$this->_view->css = html::css(array('uiCss/jquery.ui.all.css', 'uiCss/demos.css'));
-		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'jquery.ui.core.js', 'jquery.ui.widget.js', 'jquery.ui.tabs.js', 'funcaoTab.js'));
-		$this->_view->required  = 'required';
+		$this->_view->css = html::css(array('ui/jquery.ui.all.css', 'ui/demos.css'));
+		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.tabs.js', 'ui/funcaoTab.js', 'ckeditor.js', 'masked_input.js', 'funcao_masked.js'));
 		
 		$this->loadModel('categorias');
 		$this->_view->todasCategorias = $this->categorias->ativas();
@@ -34,11 +33,16 @@ class produtosController extends controller {
 			$num_produto    = $_POST['num_produto'];
 			$num_alerta     = $_POST['num_alerta'];
 			$num_valor      = $_POST['num_valor'];
-			$des_desc 	    = $_POST['des_desc'];
+			$des_desc 	    = $_POST['editor1'];
 			$des_info 	    = $_POST['des_info'];
 			$url_slug  	    = $_POST['url_slug'];
 			$ind_status     = $_POST['ind_status'];
 			$cod_categorias = $_POST['categorias'];
+			
+			$num_altura 		= $_POST['num_altura'];
+			$num_largura 		= $_POST['num_largura'];
+			$num_circunferencia = $_POST['num_circunferência'];
+			$num_peso 			= $_POST['num_peso'];
 			
 			$campos = array($nom_produto,$num_valor,$url_slug);
 		    $diferenteZero = model::diferenteZero($campos); //verifica se todos os campos do array contem valor
@@ -56,16 +60,23 @@ class produtosController extends controller {
 				$this->produtos->des_informacao  	= $des_info;
 				$this->produtos->cod_status  		= $ind_status;
 				$this->produtos->cadastrar();
-			
+				
+				//captura ultimo id inserido
+				$this->produtos->ultimo_id = $this->produtos->conn->lastInsertId();
+								
+				$this->loadModel('produtosDimensoes');			
+				$this->produtosDimensoes->num_altura 		 = (int)$num_altura;
+				$this->produtosDimensoes->num_largura 	     = (int)$num_largura;
+				$this->produtosDimensoes->num_circunferencia = (int)$num_circunferencia;
+				$this->produtosDimensoes->num_peso 		     = (int)$num_peso;
+				$this->produtosDimensoes->cod_produto    	 = $this->produtos->ultimo_id;	 
+				$this->produtosDimensoes->cadastrar();
+				
 				$this->loadModel('categoriasProdutos');
 				$this->categoriasProdutos->cod_produto   = $this->clientes->conn->lastInsertId();
-				foreach($cod_categorias as $cod_categoria) {
-					$this->categoriasProdutos->cod_categoria = $cod_categoria['categorias'];
-					$this->categoriasProdutos->porProduto();	
-				}
-				
-				
-				
+				$this->categoriasProdutos->porProduto($cod_categorias);
+								
+				//=============================================================
 				 /*$this->loadModel('clienteInformacoes');
 				$this->clienteInformacoes->num_rg 				= $num_rg;
 				$this->clienteInformacoes->num_cpf 				= $num_cpf;
@@ -103,7 +114,6 @@ class produtosController extends controller {
 	public function visualizar($id = false) {
 		$this->_view->titulo = "Produtos > Visualizar";
 		$this->_view->script = html::script(array('toolTip.js'));
-		
 		
 		if ($id) {
 			 $this->produtos->id = $id;
@@ -150,7 +160,11 @@ class produtosController extends controller {
 	
 	public function alterar($id = false) {
 		$this->_view->titulo = "Produtos > Alterar";
-		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js'));
+		$this->_view->css = html::css(array('ui/jquery.ui.all.css', 'ui/demos.css'));
+		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.tabs.js', 'ui/funcaoTab.js'));
+		
+		$this->loadModel('categorias');
+		$this->_view->todasCategorias = $this->categorias->ativas();
 		
 		if ($id) {
 			$this->produtos->id = $id;
@@ -244,7 +258,6 @@ class produtosController extends controller {
 		}
 		$this->_view->renderView('form');
 	}
-
 	
 	public function excluir() {	
 		$this->_view->selecionado = $this->produtos->selectArray($_POST['check']);

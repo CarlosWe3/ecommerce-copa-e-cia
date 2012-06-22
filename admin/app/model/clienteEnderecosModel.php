@@ -1,8 +1,10 @@
 <?php
+/**
+ * Classe model de enderecos de clientes
+ * @author Guilherme Lessa 22/06/12 - 14:30
+ */
 class clienteEnderecosModel extends model {
-	
 	public $tabela = "cec_cliente_enderecos";
-	
 	public $cod_cliente_endereco;
 	public $des_endereco;
 	public $num_endereco;
@@ -17,6 +19,11 @@ class clienteEnderecosModel extends model {
 		parent::__construct();
 	}
 	
+   /**
+	* Método que seta o endereço selecionado por id
+    * @param int $this->id - chave primaria do endereço
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function _set() {
 		$res = $this->procura('unico');
 		
@@ -33,6 +40,11 @@ class clienteEnderecosModel extends model {
 		}
 	}
 	
+   /**
+	* Método que seta o endereco do cliente pelo id
+    * @param int $this->id - chave primaria do cliente
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function setPeloCliente() {
 		$res = $this->procura('unico',array('cod_cliente'=>$this->cod_cliente));
 		
@@ -48,6 +60,11 @@ class clienteEnderecosModel extends model {
 		}
 	}
 	
+   /**
+	* Método que cadastra o endereco do cliente pelo id
+    * @param int $this->id - chave primaria do cliente
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/	
 	function cadastrar() {
 		$sql = "insert into ".$this->tabela." 
 				(des_endereco, num_endereco, num_cep, nom_bairro, des_complemento, 
@@ -64,6 +81,11 @@ class clienteEnderecosModel extends model {
 		$prep->execute();
 	}
 	
+   /**
+	* Método que altera o endereco do cliente pelo id
+    * @param int $this->id - chave primaria do endereço do cliente
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela."
 				SET des_endereco   	= ?
@@ -79,6 +101,12 @@ class clienteEnderecosModel extends model {
 		$prep->execute($valores);
 	}
 	
+	
+   /**
+	* Método que exclui endereço dos clientes de acordo com array de codigo de clientes
+    * @param int $this->id - chave primaria dos clientes
+	* @author Guilherme Lessa 22/06/12 - 14:40
+	*/
 	function excluirArray($array) {
 		$cod = '';
 		foreach($array as $ln) {

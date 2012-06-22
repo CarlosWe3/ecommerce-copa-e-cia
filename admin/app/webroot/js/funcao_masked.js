@@ -8,4 +8,6 @@ jQuery(function($){
    $(".tel").mask("(99) 9999-9999");
    $(".dat").mask("99/99/9999");
    $(".cep").mask("99999-999");
+   $(".dimensoes").mask("9,99 mt");
+   $(".peso").mask("9,999 kg");
 });

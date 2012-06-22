@@ -1,8 +1,10 @@
 <?php
+/**
+ * Classe model de estados
+ * @author Guilherme Lessa 22/06/12 - 14:30
+ */
 class clienteInformacoesModel extends model {
-	
 	public $tabela = "cec_cliente_informacoes";
-	
 	public $cod_cliente_informacao;
 	public $num_rg;
 	public $num_cpf;
@@ -20,6 +22,10 @@ class clienteInformacoesModel extends model {
 		parent::__construct();
 	}
 	
+	/**
+	 * metodo que seta as informações de clientes
+	 * @author Guilherme Lessa 22/06/12 - 14:30
+	 */
 	function _set() {
 		$res = $this->procura('unico');
 		
@@ -39,6 +45,10 @@ class clienteInformacoesModel extends model {
 		}
 	}
 	
+   /**
+	* Método que seta informações de clientes de acordo com o id do cliente
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function setPeloCliente() {
 		$res = $this->procura('unico',array('cod_cliente'=>$this->cod_cliente));
 		
@@ -58,6 +68,10 @@ class clienteInformacoesModel extends model {
 		}
 	}
 	
+   /**
+	* Método que cadastra informações de clientes
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function cadastrar() {
 		$sql = "insert into ".$this->tabela." 
 				(num_rg, num_cpf, num_cnpj, dat_alteracao, ind_genero, 
@@ -78,6 +92,10 @@ class clienteInformacoesModel extends model {
 		$prep->execute();
 	}
 	
+   /**
+	* Método que altera informações de clientes
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela."
 				SET num_rg   		     = ?
@@ -97,6 +115,11 @@ class clienteInformacoesModel extends model {
 		var_dump($prep->errorInfo());
 	}
 	
+   /**
+	* Método que exclui informações de clientes de array de cod_clientes
+	* @param array $array - chave primaria de clientes
+	* @author Guilherme Lessa 22/06/12 - 14:30
+	*/
 	function excluirArray($array) {
 		$cod = '';
 		foreach($array as $ln) {

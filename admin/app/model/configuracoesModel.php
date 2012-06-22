@@ -1,6 +1,9 @@
 <?php
+/**
+ * Classe model de configurações do site
+ * @author Guilherme Lessa 22/06/12 - 14:00
+ */
 class configuracoesModel extends model {
-	
 	public $tabela = "cec_configuracoes";
 	public $nom_loja;
 	public $des_email_principal;
@@ -10,7 +13,11 @@ class configuracoesModel extends model {
 	public function __construct() {
 		parent::__construct();
 	}
-			
+	
+	 /**
+      * Método que seta as variáveis do controler com a unica configuração inserida no banco
+      * @author Guilherme Lessa 22/06/12 - 14:00
+      */
 	function _set() {
 		$res = $this->procura('unico');
 		
@@ -22,6 +29,10 @@ class configuracoesModel extends model {
 		}
 	}
 	
+   /**
+	* Método que altera as configurações do site
+	* @author Guilherme Lessa 22/06/12 - 14:00
+	*/
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela." 
 				SET nom_loja 			= ?

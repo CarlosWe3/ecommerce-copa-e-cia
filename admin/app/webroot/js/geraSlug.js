@@ -6,6 +6,16 @@
  * 
  */
 function geraSlug(value){
+	/*
+	acentos = value.replace('ã', 'a');
+	
+	arr = new Array('ã', 'á');	//caracteres a asubstituir
+	for (i=0; i<arr.length;i++) {
+		if (value == arr[i]) {
+			
+	    }
+	}
+	*/
 	string = value.replace(/\W/g, "-"); //substitui caracteres especias e espaços por line
 	minusculo = string.toLowerCase(); //transforma tudo em letras minusculas
 	$('.campoSlug').val(minusculo);

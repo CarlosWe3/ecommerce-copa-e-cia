@@ -80,6 +80,7 @@ class produtosModel extends model {
 						'".$this->cod_status."')";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
+		var_dump($prep->errorInfo());
 	}
 	
 	function selectArray($array) {

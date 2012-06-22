@@ -1,8 +1,10 @@
 <?php
+/**
+ * Classe model de status
+ * @author Guilherme Lessa 22/06/12 - 14:10
+ */
 class statusModel extends model {
-	
 	public $tabela = "cec_status";
-	
 	public $cod_status;
 	public $nom_status;
 	public $des_status;
@@ -12,6 +14,11 @@ class statusModel extends model {
 		parent::__construct();
 	}
 	
+	/**
+	* Método que seta o status selecionado no select option
+    * @param int $this->id - chave primaria do status
+	* @author Guilherme Lessa 22/06/12 - 14:10
+	*/
 	function _set() {
 		$res = $this->procura('unico');
 		
