@@ -1,19 +1,19 @@
 <?php
 /**
  * Framework WE3 Online
- * Desenvolvido por: Carlos Augusto Gartner  e Danial Salvagni
+ * Desenvolvido por: Carlos Augusto Gartner e Daniel Salvagni
  * 
  * @copyright WE3 Online
  * @version 1.0.0.0
  * 
  * Antes de iniciar o sistema e necessario configurar alguns locais para rodar perfeitamente:
- * 
  * 1- Configurar o "BASE_URL" abaixo, para a url do projeto ex: http://www.projeto.com.br/site
  * 2- Configurar as demais configurações em -> /vendor/config/config.php
- * 
  */
+ 
 // inicia a sessao
 session_start();
+
 // Configuracoes de pastas
 defined('DS') 			? null : define('DS', DIRECTORY_SEPARATOR);
 defined('SITE_ROOT') 	? null : define('SITE_ROOT', realpath(dirname(__FILE__)) . DS);
@@ -50,9 +50,6 @@ try {
     
     // inicia sistema
     bootstrap::run(new request());
-	
 } catch (Exception $e) {
-	
     echo $e->getMessage();
-    
 }

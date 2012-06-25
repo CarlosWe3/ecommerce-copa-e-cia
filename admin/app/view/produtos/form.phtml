@@ -1,10 +1,24 @@
-<h2><?php echo $this->titulo; ?></h2>
 <script>
-	 $('.ckeditor').ckeditor();
+	$(document).ready(function() {
+		var nomes = [<?php echo $this->nom_produtos; ?>];
+		
+		$('#prod_relacionados').autocomplete({
+			source: nomes,
+			minLength: 2,
+			close: function(event, ui) {
+				var value = $('#prod_relacionados').val();
+				alert(value);
+			}
+		});
+	});
 </script>
+
+<h2><?php echo $this->titulo; ?></h2>
+
 <div class="box">
 	<a href="<?php echo BASE_URL.'produtos'; ?>" class="botao fl">Voltar</a>
 </div>
+
 <form method="post">
 	<div id="tabs">
 		<ul>
@@ -74,10 +88,14 @@
 			</p>
 			<p class="input">
 				<label>Produtos Relacionados:</label>
-				<select name="prod_relacionados">
-					<option value="<?php echo $status['cod_status']; ?>" <?php echo isset($this->produtos->cod_status) ? $status['cod_status'] == $this->produtos->cod_status ? 'selected="selected"' : '' : null ?>><?php echo $status['nom_status']; ?></option>
-				</select>
+				<input type="text" name="prod_relacionados" id="prod_relacionados" maxlength="255" class="input_min"/>
 			</p>
+			
+			<div class="prod_relacionados">
+				<h1>Produto 1<a href="#">excluir</a></h1>
+				<h1>Produto 2<a href="#">excluir</a></h1>
+				<h1>Produto 3<a href="#">excluir</a></h1>
+			</div>
 		</div>
 		
 		<div id="tabs-4">

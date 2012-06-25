@@ -8,6 +8,18 @@ class produtosController extends controller {
 	public function index() {
 		$this->_view->titulo = "Produtos";
 		$this->_view->script = html::script(array('check.js'));
+		
+		$this->loadModel('status');
+		$this->_view->todosStatus = $this->status->procura('todos');
+				
+		if(isset($_POST['buscar'])) {
+			$this->produtos->buscar_nom 			 = $_POST['buscar_nom'];
+			$this->produtos->buscar_val 			 = $_POST['buscar_val'];
+			$this->produtos->buscar_des 			 = $_POST['buscar_des'];
+			$this->produtos->buscar_dat_inicio_promo = $_POST['buscar_dat_inicio_promo'];
+			$this->produtos->buscar_dat_fim_promo 	 = $_POST['buscar_dat_fim_promo'];
+			$this->produtos->buscar_status		     = $_POST['buscar_status'];
+		}
 			
 		$this->_view->res = $this->produtos->getListagem();
 	}
@@ -15,12 +27,14 @@ class produtosController extends controller {
 	public function cadastrar() {
 		$this->_view->titulo = "Produtos > Cadastrar";
 		$this->_view->css = html::css(array('ui/jquery.ui.all.css', 'ui/demos.css'));
-		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.tabs.js', 'ui/funcaoTab.js', 'ckeditor.js', 'masked_input.js', 'funcao_masked.js'));
+		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.position.js', 'ui/jquery.ui.tabs.js', 'ui/jquery.ui.autocomplete.js', 'ui/funcoesUi.js', 'masked_input.js', 'funcao_masked.js', BASE_URL.'app/webroot/plugins/ckeditor/ckeditor.js'));
+		
+		$this->_view->nom_produtos = $this->produtos->arrayNomProdutos();
 		
 		$this->loadModel('categorias');
 		$this->_view->todasCategorias = $this->categorias->ativas();
 		 
-		 /*
+		/*
 		$this->loadModel('estados');
 		$this->_view->todosEstados = $this->estados->procura('todos');
 		*/
@@ -112,7 +126,6 @@ class produtosController extends controller {
 	}
 	
 	public function visualizar($id = false) {
-		$this->_view->titulo = "Produtos > Visualizar";
 		$this->_view->script = html::script(array('toolTip.js'));
 		
 		if ($id) {
@@ -155,11 +168,12 @@ class produtosController extends controller {
 			 $this->status->id = $this->clientes->cod_status;
 			 $this->status->_set();
 			 $this->_view->status = $this->status;	*/		  
+			 
+			 $this->_view->titulo = "Produtos > Visualizar > #".$this->produtos->cod_produto.' '.$this->produtos->nom_produto;
 		}
 	}
 	
 	public function alterar($id = false) {
-		$this->_view->titulo = "Produtos > Alterar";
 		$this->_view->css = html::css(array('ui/jquery.ui.all.css', 'ui/demos.css'));
 		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.tabs.js', 'ui/funcaoTab.js'));
 		
@@ -255,6 +269,8 @@ class produtosController extends controller {
 					$this->_view->_tipoMsg = 'sucesso';
 				}
 			}
+
+			$this->_view->titulo = "Produtos > Alterar > #".$this->produtos->cod_produto.' '.$this->produtos->nom_produto;
 		}
 		$this->_view->renderView('form');
 	}

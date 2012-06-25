@@ -36,7 +36,6 @@ class categoriasController extends controller {
 	* @author Guilherme Lessa 22/06/12 - 13:00
 	*/
 	public function visualizar($id = false) {
-		$this->_view->titulo = "Categorias > Visualizar";
 		$this->_view->script = html::script(array('toolTip.js'));
 		
 		if ($id) {
@@ -48,6 +47,8 @@ class categoriasController extends controller {
 			 $this->status->id = $this->categorias->cod_status;
 			 $this->status->_set();
 			 $this->_view->status = $this->status;			  
+			 
+			 $this->_view->titulo = "Categorias > Visualizar > #".$this->categorias->cod_categoria.' '.$this->categorias->nom_categoria;
 		}
 	}
 	
@@ -91,7 +92,6 @@ class categoriasController extends controller {
     * @author Guilherme Lessa 22/06/12 - 13:00
     */
 	public function alterar($id = false) {
-		$this->_view->titulo = "Categorias > Alterar";
 		$this->_view->script = html::script(array('toolTip.js', 'geraSlug.js'));
 		
 		if ($id) {
@@ -130,6 +130,8 @@ class categoriasController extends controller {
 					$this->_view->_tipoMsg = 'sucesso';
 				}
 			}
+
+			 $this->_view->titulo = "Categorias > Alterar > #".$this->categorias->cod_categoria.' '.$this->categorias->nom_categoria;
 		}
 		$this->_view->renderView('form');
 	}

@@ -343,3 +343,26 @@ a:visited { color: #fff; }
 	margin: 0;
 	padding: 0;
 }
+
+.prod_relacionados h1 {
+	border: 1px solid #427cc6;
+	color: #427cc6;
+	margin: 5px;
+	height: 20px;
+	padding: 2px;
+	background: #f9f9f9;
+	width: 400px;	
+}
+
+.prod_relacionados a {
+	cursor: pointer;
+	float: right;
+	background: #ff0000;
+	color: #f9f9f9;
+	text-decoration: none;
+	padding: 1px 5px 1px 5px;
+	
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}

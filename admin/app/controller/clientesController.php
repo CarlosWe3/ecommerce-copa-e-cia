@@ -150,7 +150,6 @@ class clientesController extends controller {
 	* @author Guilherme Lessa 22/06/12 - 13:40
 	*/
 	public function visualizar($id = false) {
-		$this->_view->titulo = "Clientes > Visualizar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js'));
 		
 		if ($id) {
@@ -186,7 +185,9 @@ class clientesController extends controller {
 			 $this->loadModel('status');
 			 $this->status->id = $this->clientes->cod_status;
 			 $this->status->_set();
-			 $this->_view->status = $this->status;			  
+			 $this->_view->status = $this->status;		
+			 
+			  $this->_view->titulo = "Clientes > Visualizar > #".$this->clientes->cod_cliente.' '.$this->clientes->nom_cliente;	  
 		}
 	}
 	
@@ -196,7 +197,6 @@ class clientesController extends controller {
     * @author Guilherme Lessa 22/06/12 - 13:40
     */
 	public function alterar($id = false) {
-		$this->_view->titulo = "Clientes > Alterar";
 		$this->_view->script = html::script(array('masked_input.js', 'funcao_masked.js', 'verifica_pj.js', 'input_int.js', 'geraCidades.js'));
 		
 		if ($id) {
@@ -315,6 +315,8 @@ class clientesController extends controller {
 					$this->_view->_tipoMsg = 'sucesso';
 				}
 			}
+
+			$this->_view->titulo = "Clientes > Alterar > #".$this->clientes->cod_cliente.' '.$this->clientes->nom_cliente;	
 		}
 		$this->_view->renderView('form');
 	}

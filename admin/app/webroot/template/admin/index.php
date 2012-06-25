@@ -19,6 +19,9 @@
 			echo html::css(array('reset.css','style.css','layout.css','menu.css','padrao.css'));
 			echo html::script('modernizr.js');
 		?>
+		
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="<?php echo BASE_URL . 'app/webroot/' ?>js/libs/jquery-1.7.1.min.js"><\/script>')</script>
 	</head>
 	<body>
 		<!-- Inicio Header  -->
@@ -48,6 +51,8 @@
 						<li><a href="#">Tags</a></li>
 					</ul>	
 				</li>
+				<li><a href="#">Menus</a></li>
+				<li><a href="#">Páginas</a></li>
 				<li><a href="#">Sair</a></li>
 			</ul>
 		</div>
@@ -71,8 +76,7 @@
 		<!-- Loder dos javascript embaixo do documento -->
 
 		<!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="<?php echo BASE_URL . 'app/webroot/' ?>js/libs/jquery-1.7.1.min.js"><\/script>')</script>
+		
 			
 		<!-- scripts concatenated and minified via build script -->
 		<?php

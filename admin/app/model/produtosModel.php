@@ -11,31 +11,44 @@ class produtosModel extends model {
 	public $des_informacao;
 	public $cod_status;
 	
+	public $buscar_nom;
+	public $buscar_val;
+	public $buscar_des;
+	public $buscar_dat_inicio_promo;
+	public $buscar_dat_fim_promo;
+	
 	public function __construct() {
 		parent::__construct();
 	}
 		
 	public function getListagem() {
-		/*$busca = '';
+		
+	
+		/*
+		$busca = '';
 		if($this->buscar_nom) {
-			$busca .= " AND C.nom_cliente LIKE '%".$this->buscar_nom."%' ";
+			$busca .= " AND P.nom_produto LIKE '%".$this->buscar_nom."%' ";
 		}
 		
-		if($this->buscar_email) {
-			$busca .= " AND C.des_email LIKE '%".$this->buscar_email."%' ";
+		if($this->buscar_val) {
+			$busca .= " AND P.vlr_preco = '%".$this->buscar_val."%' ";
 		}
 		
-		if($this->buscar_rg) {
-			$busca .= " AND I.num_rg = '".$this->buscar_rg."' ";
+		if($this->buscar_des) {
+			$busca .= " AND P.des_descricao LIKE '".$this->buscar_des."' ";
 		}
 		
-		if($this->buscar_cpf) {
-			$busca .= " AND I.num_cpf = '".$this->buscar_cpf."' ";
+		if($this->buscar_dat_inicio_promo) {
+			$busca .= " AND PP.dat_inicio = '".$this->buscar_dat_inicio_promo."' ";
 		}
 		
-		if($this->buscar_cnpj) {
-			$busca .= " AND I.num_cnpj = '".$this->buscar_cnpj."' ";
-		}*/
+		if($this->buscar_dat_fim_promo) {
+			$busca .= " AND PP.dat_fim = '".$this->buscar_dat_fim_promo."' ";
+		}
+		 
+		if($this->buscar_status) {
+			$busca .= " AND S.cod_status = '".$this->buscar_status."' ";
+		}*/	
 		
 		$sql = "SELECT P.cod_produto, 
 		               P.nom_produto,
@@ -46,6 +59,7 @@ class produtosModel extends model {
 	                   cec_status as S
 		        WHERE P.cod_status = S.cod_status
 		        ORDER BY P.cod_produto DESC";
+				// "/*cec_produto_promocoes as PP*/"
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
 		return $prep->fetchAll();
@@ -125,6 +139,28 @@ class produtosModel extends model {
 		
 		$sql = 'DELETE FROM '.$this->tabela.' 
 				WHERE cod_produto IN ('.$cod.')';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
+	
+	function arrayNomProdutos() {
+		$sql = 'SELECT nom_produto
+		        FROM '.$this->tabela.'';
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+		
+		$arrayNomProdutos = '';
+		foreach($prep->fetchAll() as $ln) {
+			 $arrayNomProdutos .= ',"'.$ln['nom_produto'].'"'; 
+		} 
+		
+		return substr($arrayNomProdutos, 1);
+	}
+	
+	function validaNomeDiferente(){
+		$sql = 'SELECT nom_produto
+		        FROM '.$this->tabela.'
+		        WHERE nom_produto = ';
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
 	}

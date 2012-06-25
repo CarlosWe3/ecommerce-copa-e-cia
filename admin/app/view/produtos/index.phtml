@@ -13,26 +13,34 @@
 		</p>
 		<p class="fl input margin5">
 			<label>Valor:</label>
-			<input type="text" name="buscar_nom"/>
+			<input type="text" name="buscar_val"/>
 		</p>
 		<p class="fl input margin5">
 			<label>Descrição:</label>
-			<input type="text" name="buscar_nom"/>
+			<input type="text" name="buscar_des"/>
 		</p>
 		<p class="fl input margin5">
 			<label>Início da Promoção:</label>
-			<input type="text" name="buscar_nom"/>
+			<input type="text" name="buscar_dat_inicio_promo"/>
 		</p>
 		<p class="fl input margin5">
-			<label>Final da Promoção:</label>
-			<input type="text" name="buscar_nom"/>
+			<label>Fim da Promoção:</label>
+			<input type="text" name="buscar_dat_fim_promo"/>
 		</p>
 		<p class="fl input margin5">
 			<label>Slug:
-				<?php $mensagemSlug = "<strong>Slug</strong></br>Palavras chave para categorias. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria e seus produtos. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
+				<?php $mensagemSlug = "<strong>Slug</strong></br>Palavras chave para produtos. Elas ajudarão os buscadores, como o Google por exemplo, a encontrar seus produtos.</br>Palavras relacionadas a categoria e seus produtos. Sem acentos, números, caractéres especiais, e espaços devem ser substituidos por sinal negativo (-)."; ?>
 				<a onmouseover="Tip('<?php echo $mensagemSlug; ?>')" onmouseout="UnTip()">(o que é?)</a>
 			</label>
-			<input type="text" class="rg campoSlug" name="buscar_slug" onkeyup="geraSlug(this.value)"/>
+			<input type="text" class="campoSlug" name="buscar_slug" onkeyup="geraSlug(this.value)"/>
+		</p>
+		<p class="fl input margin5">
+			<label>Status:</label>
+			<select name="buscar_status">
+			<?php foreach($this->todosStatus as $status) { ?> 
+				<option value="<?php echo $status['cod_status']; ?>"><?php echo $status['nom_status']; ?></option>
+			<?php } ?>
+			</select>
 		</p>
 		<input class="botao fr" name="buscar" type="submit" value="Buscar"/>
 	</div>
@@ -71,7 +79,7 @@
 						<a href="<?php echo BASE_URL.'produtos/alterar/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Alterar</a>
 					</td>
 					<td class="tac width5">
-						<a href="<?php echo BASE_URL.'produtos/promcao/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Promover</a>
+						<a href="<?php echo BASE_URL.'produtos/promocao/'.$ln['cod_produto']; ?>" class="botao fl amarelo">Promover</a>
 					</td>
 				</tr>			
 			<?php } ?>
