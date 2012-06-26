@@ -5,12 +5,32 @@
 		$('#prod_relacionados').autocomplete({
 			source: nomes,
 			minLength: 2,
-			close: function(event, ui) {
-				var value = $('#prod_relacionados').val();
-				alert(value);
+			change: function(event, ui) {
+				var nom_produto = $('#prod_relacionados').val();
+				
+				var url = '<?php echo BASE_URL.'produtosRelacionados/cadastrar'; ?>';
+				$.post(url, {
+					cod_produto: <?php echo $this->cod_produto; ?>,
+					cod_relacionamento_tipo: $('.cod_relacionamento_tipo').val(),
+					nom_prod_relacionado: nom_produto
+				}, function(retorno) {
+					$('#prod_relacionados').val('');
+					var id = retorno;
+					var produto = '<h1 id="'+id+'">'+nom_produto+'<a onclick="delRelacionado('+"'"+id+"'"+');">X</a></h1>';
+					$('.relacionados').append(produto);	
+				});			
 			}
 		});
 	});
+	
+	function delRelacionado(id) {
+		var url = '<?php echo BASE_URL.'produtosRelacionados/excluir'; ?>';
+		$.post(url, {
+			cod_relacionado: id
+		}, function(retorno) {
+			$('#'+id).fadeOut(100);
+		});		
+	}
 </script>
 
 <h2><?php echo $this->titulo; ?></h2>
@@ -88,14 +108,14 @@
 			</p>
 			<p class="input">
 				<label>Produtos Relacionados:</label>
-				<input type="text" name="prod_relacionados" id="prod_relacionados" maxlength="255" class="input_min"/>
+				<input type="text" name="prod_relacionados" id="prod_relacionados" maxlength="255" class="input_min"/>		
+				<select name="cod_relacionamento_tipo" class="cod_relacionamento_tipo">
+				<?php foreach($this->todosRelacionamentos as $ln) { ?>
+					<option value="<?php echo $ln['cod_relacionamento_tipo']; ?>"><?php echo $ln['des_relacionamento_tipo']; ?></option>
+				<?php } ?>
+				</select>
 			</p>
-			
-			<div class="prod_relacionados">
-				<h1>Produto 1<a href="#">excluir</a></h1>
-				<h1>Produto 2<a href="#">excluir</a></h1>
-				<h1>Produto 3<a href="#">excluir</a></h1>
-			</div>
+			<div class="relacionados"></div>
 		</div>
 		
 		<div id="tabs-4">

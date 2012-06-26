@@ -344,24 +344,30 @@ a:visited { color: #fff; }
 	padding: 0;
 }
 
-.prod_relacionados h1 {
-	border: 1px solid #427cc6;
+/* linha exibe os produtos relacionados */
+.relacionados h1 {
 	color: #427cc6;
-	margin: 5px;
 	height: 20px;
 	padding: 2px;
 	background: #f9f9f9;
-	width: 400px;	
+	margin: 2px 2px 0 -5px;
+	height: 30px;
+	line-height: 30px;
+	width: 600px;	
+	border: 1px solid #d1d0cc;
 }
 
-.prod_relacionados a {
+/* linha exibe os produtos relacionados */
+.relacionados a {
 	cursor: pointer;
 	float: right;
-	background: #ff0000;
+	background: red;
 	color: #f9f9f9;
 	text-decoration: none;
 	padding: 1px 5px 1px 5px;
-	
+	border: 0;
+	line-height: 20px;
+	margin: 3px 0 0 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;

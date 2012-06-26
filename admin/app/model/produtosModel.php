@@ -1,6 +1,9 @@
 <?php
+/**
+ * Classe model de produtos do site
+ * @author Guilherme Lessa 26/06/12 - 17:45
+ */
 class produtosModel extends model {
-	
 	public $tabela = "cec_produtos";
 	
 	public $num_produto;
@@ -22,8 +25,6 @@ class produtosModel extends model {
 	}
 		
 	public function getListagem() {
-		
-	
 		/*
 		$busca = '';
 		if($this->buscar_nom) {
@@ -65,6 +66,10 @@ class produtosModel extends model {
 		return $prep->fetchAll();
 	}
 	
+	 /**
+      * Método que seta as variáveis do controler com a unica configuração inserida no banco
+      * @author Guilherme Lessa 26/06/12 - 17:50
+      */
 	function _set() {
 		$res = $this->procura('unico');
 		
@@ -80,7 +85,11 @@ class produtosModel extends model {
 			$this->cod_status   	  = $res['cod_status'];
 		}
 	}
-
+	
+	/**
+	* Método que cadastra produtos no site
+	* @author Guilherme Lessa 26/06/12 - 17:50
+	*/
 	function cadastrar() {
 		$sql = "insert into ".$this->tabela." 
 				(nom_produto, num_produto, num_estoque_alerta, vlr_preco, url_slug, des_descricao, des_informacao, cod_status) 
@@ -94,9 +103,25 @@ class produtosModel extends model {
 						'".$this->cod_status."')";
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
-		var_dump($prep->errorInfo());
 	}
 	
+	/**
+	* Método que cria um pré-cadastro de produtos no site
+	* @author Guilherme Lessa 26/06/12 - 17:50
+	*/
+	function preCadastro() {
+		$sql = "insert into ".$this->tabela." 
+				(cod_status) 
+				values (3)";
+		$prep = $this->conn->prepare($sql);
+		$prep->execute();
+	}
+	
+	/**
+	* Método constroi um array com todos os cod/nomes dos produtos
+	* @param array $array - array dos codigos/nomes de todos os produtos
+	* @author Guilherme Lessa 26/06/12 - 17:55
+	*/
 	function selectArray($array) {
 		$cod = '';
 		foreach($array as $ln) {
@@ -113,7 +138,10 @@ class produtosModel extends model {
 		return $prep->fetchAll();
 	}
 	
-	
+	/**
+	* Método que altera produtos no site
+	* @author Guilherme Lessa 26/06/12 - 17:55
+	*/
 	function alterar() {
 		$sql = "UPDATE ".$this->tabela." 
 				SET nom_produto 	   = ?
@@ -130,6 +158,11 @@ class produtosModel extends model {
 		$prep->execute($valores);	
 	}
 	
+	/**
+	* Método que exclui todos os produtos selecionados, passados no array
+	* @param array $array - array dos cod de todos os produtos selecionados a excluir
+	* @author Guilherme Lessa 26/06/12 - 17:55
+	*/
 	function excluirArray($array) {
 		$cod = '';
 		foreach($array as $ln) {
@@ -143,25 +176,71 @@ class produtosModel extends model {
 		$prep->execute();
 	}
 	
+	/**
+	* Método que constroi um array com todos os nomes dos produtos 
+	* passando o array na função autocomplete ui jquery, para selecionar produtos relacionados
+	* @author Guilherme Lessa 26/06/12 - 18:00
+	*/
 	function arrayNomProdutos() {
-		$sql = 'SELECT nom_produto
-		        FROM '.$this->tabela.'';
+		$sql = 'SELECT P.nom_produto
+		        FROM '.$this->tabela.' AS P, cec_status AS S
+				WHERE S.cod_status = 1
+				AND P.cod_status = S.cod_status';
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
 		
 		$arrayNomProdutos = '';
+		
 		foreach($prep->fetchAll() as $ln) {
 			 $arrayNomProdutos .= ',"'.$ln['nom_produto'].'"'; 
 		} 
-		
+	
 		return substr($arrayNomProdutos, 1);
 	}
 	
-	function validaNomeDiferente(){
-		$sql = 'SELECT nom_produto
-		        FROM '.$this->tabela.'
-		        WHERE nom_produto = ';
+	/**
+	* Método que limpa todos os produtos rascunhos, criados automaticamente quando se entra no cadastro de produtos e não terminados 
+	* @author Guilherme Lessa 26/06/12 - 18:00
+	*/
+	public function excluirRascunhos() {
+		$sql = 'SELECT P.cod_produto
+		        FROM '.$this->tabela.' AS P, cec_status AS S
+				WHERE S.cod_status = 3
+				AND P.cod_status = S.cod_status';
 		$prep = $this->conn->prepare($sql);
 		$prep->execute();
+		$rascunhos = $prep->fetchAll();
+		
+		foreach($rascunhos as $ln) {
+			$sql = 'DELETE FROM cec_produtos_dimensoes
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+			
+			$sql = 'DELETE FROM cec_produto_estatisticas
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+			
+			$sql = 'DELETE FROM cec_produto_imagens
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+			
+			$sql = 'DELETE FROM cec_produto_promocoes
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+			
+			$sql = 'DELETE FROM cec_produto_relacionados
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+			
+			$sql = 'DELETE FROM '.$this->tabela.'
+					WHERE cod_produto IN ('.$ln['cod_produto'].')';
+			$prep = $this->conn->prepare($sql);
+			$prep->execute();
+		}
 	}
 }

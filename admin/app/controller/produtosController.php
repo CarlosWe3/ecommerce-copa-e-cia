@@ -9,6 +9,8 @@ class produtosController extends controller {
 		$this->_view->titulo = "Produtos";
 		$this->_view->script = html::script(array('check.js'));
 		
+		$this->produtos->excluirRascunhos();
+		
 		$this->loadModel('status');
 		$this->_view->todosStatus = $this->status->procura('todos');
 				
@@ -20,7 +22,7 @@ class produtosController extends controller {
 			$this->produtos->buscar_dat_fim_promo 	 = $_POST['buscar_dat_fim_promo'];
 			$this->produtos->buscar_status		     = $_POST['buscar_status'];
 		}
-			
+		
 		$this->_view->res = $this->produtos->getListagem();
 	}
 		
@@ -29,8 +31,14 @@ class produtosController extends controller {
 		$this->_view->css = html::css(array('ui/jquery.ui.all.css', 'ui/demos.css'));
 		$this->_view->script = html::script(array('geraSlug.js', 'toolTip.js', 'ui/jquery.ui.core.js', 'ui/jquery.ui.widget.js', 'ui/jquery.ui.position.js', 'ui/jquery.ui.tabs.js', 'ui/jquery.ui.autocomplete.js', 'ui/funcoesUi.js', 'masked_input.js', 'funcao_masked.js', BASE_URL.'app/webroot/plugins/ckeditor/ckeditor.js'));
 		
+		$this->produtos->preCadastro();
+		$this->_view->cod_produto = $this->produtos->conn->lastInsertId();
+		
 		$this->_view->nom_produtos = $this->produtos->arrayNomProdutos();
 		
+		$this->loadModel('relacionamentoTipo');
+		$this->_view->todosRelacionamentos = $this->relacionamentoTipo->procura('todos');
+					
 		$this->loadModel('categorias');
 		$this->_view->todasCategorias = $this->categorias->ativas();
 		 
