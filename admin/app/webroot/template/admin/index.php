@@ -51,7 +51,7 @@
 						<li><a href="#">Tags</a></li>
 					</ul>	
 				</li>
-				<li><a href="#">Menus</a></li>
+				<li><a href="<?php echo BASE_URL.'menus'; ?>">Menus</a></li>
 				<li><a href="#">Páginas</a></li>
 				<li><a href="#">Sair</a></li>
 			</ul>

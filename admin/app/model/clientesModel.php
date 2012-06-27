@@ -65,7 +65,7 @@ class clientesModel extends model {
 		        AND I.cod_cliente_tipo = T.cod_cliente_tipo
 		        ORDER BY C.cod_cliente DESC";
 		$prep = $this->conn->prepare($sql);
-		$prep->execute();
+		$prep -> execute();
 		return $prep->fetchAll();
 	}
 	
@@ -133,7 +133,7 @@ class clientesModel extends model {
 				   ,des_email     = ? 
 				   ,cod_status    = ?
 				WHERE cod_cliente = ? ";
-		$prep = $this->conn->prepare($sql);
+		$prep = $this-> conn -> prepare($sql);
 		$valores = array($this->nom_cliente, $this->des_email, $this->cod_status, $this->cod_cliente);
 		$prep->execute($valores);
 		
